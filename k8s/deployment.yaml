@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloudverse
-        image: your-docker-repo/cloudverse:latest
+        image:  nancykumari/cloudverse:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

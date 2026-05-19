@@ -49,15 +49,4 @@ resource "aws_instance" "cloudverse" {
 output "instance_public_ip" {
   value = aws_instance.cloudverse.public_ip
 }
-provider "aws" {
-  region = var.aws_region
-}
 
-resource "aws_instance" "cloudverse" {
-  ami           = var.ami_id
-  instance_type = "t3.micro"
-  tags = { Name = "cloudverse-frontend" }
-}
-
-variable "aws_region" { default = "us-east-1" }
-variable "ami_id" { default = "ami-0c02fb55956c7d316" }

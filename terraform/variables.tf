@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"
 }
 
 variable "instance_type" {
@@ -13,13 +13,13 @@ variable "instance_type" {
 variable "ami_id" {
   description = "AMI ID to use for the instance (Ubuntu LTS recommended)"
   type        = string
-  default     = "ami-0c02fb55956c7d316"
+  default     = "ami-03f4878755434977f"
 }
 
 variable "ssh_key_name" {
   description = "Existing AWS key pair name for SSH access"
   type        = string
-  default     = ""
+  default     = "CloudVerse"
 }
 
 variable "allowed_cidr" {
