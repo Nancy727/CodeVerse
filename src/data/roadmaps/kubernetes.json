@@ -1,0 +1,23 @@
+{
+  "title":"Kubernetes Roadmap",
+  "subtitle":"From Pods to production clusters.",
+  "estimated":"3-4 weeks",
+  "progress":10,
+  "beginner":[
+    {"title":"Pods","difficulty":"Beginner","description":"Smallest deployable unit; learn pod anatomy.","time":"1 day","useCase":"Run containers with shared network","project":"Deploy a single-pod app"},
+    {"title":"Deployments","difficulty":"Beginner","description":"Manage replicas and rolling updates.","time":"1 day","useCase":"Stateless app deployment","project":"Create a deployment and scale it"},
+    {"title":"Services","difficulty":"Beginner","description":"Expose pods with stable networking.","time":"1 day","useCase":"Service discovery","project":"Create ClusterIP and NodePort services"}
+  ],
+  "intermediate":[
+    {"title":"ConfigMaps & Secrets","difficulty":"Intermediate","description":"Externalize config and secrets securely.","time":"1 day","useCase":"Config management","project":"Use ConfigMap for env vars"},
+    {"title":"Ingress","difficulty":"Intermediate","description":"HTTP routing into cluster.","time":"2 days","useCase":"Host multiple services","project":"Configure Ingress with TLS"},
+    {"title":"Helm","difficulty":"Intermediate","description":"Package apps for reuse.","time":"2 days","useCase":"Reusable deployments","project":"Create a Helm chart"}
+  ],
+  "advanced":[
+    {"title":"Monitoring & Autoscaling","difficulty":"Advanced","description":"Set up Prometheus/Grafana and HPA.","time":"2 days","useCase":"Reliable scaling","project":"Add HPA based on CPU"},
+    {"title":"Production Clusters","difficulty":"Advanced","description":"High availability, CI/CD, and security.","time":"4 days","useCase":"Run critical workloads","project":"Design a prod-ready cluster"}
+  ],
+  "production":[
+    {"title":"Cluster Operations","difficulty":"Production","description":"Backup, upgrade, and disaster recovery.","time":"3 days","useCase":"Maintain cluster health","project":"Run a cluster upgrade plan"}
+  ]
+}

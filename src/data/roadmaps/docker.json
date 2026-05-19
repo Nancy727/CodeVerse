@@ -1,0 +1,23 @@
+{
+  "title": "Docker Roadmap",
+  "subtitle": "Containerization fundamentals to production deployments.",
+  "estimated": "2-3 weeks",
+  "progress": 20,
+  "beginner": [
+    {"title":"Images","difficulty":"Beginner","description":"Understand images vs containers and how images are built.","time":"1 day","useCase":"Reusable app artifacts","project":"Build a base image for a simple Node app"},
+    {"title":"Containers","difficulty":"Beginner","description":"Run and manage containers with Docker CLI.","time":"1 day","useCase":"Local dev and lightweight services","project":"Run a multi-container demo"},
+    {"title":"Dockerfile Basics","difficulty":"Beginner","description":"FROM, RUN, COPY, CMD and best practices.","time":"2 days","useCase":"Reproducible builds","project":"Write Dockerfile for React app"}
+  ],
+  "intermediate": [
+    {"title":"Volumes & Persistence","difficulty":"Intermediate","description":"Persist data across container restarts.","time":"1 day","useCase":"Databases in containers","project":"Persist Postgres data with volumes"},
+    {"title":"Networking","difficulty":"Intermediate","description":"Container networking and port mapping.","time":"1 day","useCase":"Service communication","project":"Setup network between app and DB"},
+    {"title":"Compose","difficulty":"Intermediate","description":"Define multi-container apps with docker-compose.","time":"2 days","useCase":"Local orchestration","project":"Compose app + db + reverse-proxy"}
+  ],
+  "advanced": [
+    {"title":"Multi-stage Builds","difficulty":"Advanced","description":"Produce small production images using multi-stage builds.","time":"1 day","useCase":"Smaller images for CI/CD","project":"Multi-stage build for production image"},
+    {"title":"Security","difficulty":"Advanced","description":"Image scanning, least-privilege containers.","time":"2 days","useCase":"Hardened production images","project":"Scan image and fix vulnerabilities"}
+  ],
+  "production": [
+    {"title":"Production Deployments","difficulty":"Production","description":"CI/CD pipelines and registries for production images.","time":"3 days","useCase":"Release workflow","project":"Push image to registry and deploy via Kubernetes"}
+  ]
+}

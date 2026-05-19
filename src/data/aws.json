@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "heading": "☁️ AWS - Cloud Building Blocks",
+    "subtitle": "Overview of Amazon Web Services: compute, storage, networking, and managed services to build modern applications.",
+    "difficulty": "Beginner",
+    "timeToLearn": "4-6 hours",
+    "keySkill": "Cloud Architecture",
+    "whyLearn": "AWS is the largest cloud provider with a broad set of services; understanding core services is essential for cloud-native development.",
+    "icon": "☁️"
+  },
+  "storytelling": {
+    "problem": "On-prem infra takes weeks to provision and is hard to scale. Developers wait days for dev environments.",
+    "solution": "AWS provides on-demand virtual infrastructure and managed services so teams can provision resources in minutes and scale automatically.",
+    "analogy": "Think of AWS as renting specialized factories on demand instead of building your own; spin them up when you need them and tear them down when done.",
+    "realWorldExample": "Startups launch new features by provisioning managed databases, object storage, and serverless functions without managing hardware.",
+    "deepDive": "Key areas: Compute (EC2, Lambda), Storage (S3, EBS), Databases (RDS, DynamoDB), Networking (VPC), and Observability (CloudWatch)." 
+  },
+  "architectureFlow": [
+    {"icon":"🧩","title":"Design Services","description":"Choose compute/storage/networking components","details":"Pick managed services (Lambda, RDS) to reduce operational load."},
+    {"icon":"🔐","title":"Secure & IAM","description":"Use IAM roles and policies to grant least privilege","details":"Design role-based access for services and users, enable MFA for administrative accounts."},
+    {"icon":"🚀","title":"Deploy & Scale","description":"Use AutoScaling, Load Balancers, and managed services","details":"Combine ASG, ALB/NLB, and RDS read replicas for high availability."},
+    {"icon":"💾","title":"Monitor & Operate","description":"Use CloudWatch, X-Ray, and logging","details":"Set up dashboards, alarms, and automated remediation for common failures."}
+  ],
+  "learningPath": {
+    "beginner": [
+      {"topic":"EC2 vs Lambda","description":"Understand VM-based vs serverless compute."},
+      {"topic":"S3 Basics","description":"Object storage for static assets and backups."},
+      {"topic":"VPC Networking","description":"Basics of subnets, security groups, and route tables."},
+      {"topic":"IAM Fundamentals","description":"Users, roles, policies, and best practices."}
+    ],
+    "intermediate": [
+      {"topic":"RDS & DynamoDB","description":"Managed relational vs NoSQL choices and scaling patterns."},
+      {"topic":"CI/CD on AWS","description":"Use CodePipeline, CodeBuild, or integrate GitHub Actions with AWS."}
+    ],
+    "advanced": [
+      {"topic":"Infra as Code","description":"Use Terraform/CloudFormation to manage infrastructure."},
+      {"topic":"Cost Optimization","description":"Right-size resources and use reserved/spot instances."}
+    ]
+  },
+  "title": "AWS",
+  "intro": {
+    "what": "Amazon Web Services (AWS) is a comprehensive cloud platform offering over 200 fully featured services from data centers globally.",
+    "why": "AWS provides elasticity, managed services, and global infrastructure which help teams move faster and operate at scale.",
+    "problems_solved": ["Slow provisioning","Manual scaling","High ops burden"],
+    "industry_importance": "AWS is the market leader in cloud computing and a core skill for cloud and DevOps engineers." 
+  },
+  "commands": [],
+  "comparisons": [],
+  "beginnerMistakes": [{"title":"Overprovisioning Resources","description":"Launching large instances by default increases cost.","howToFix":"Start small, use autoscaling, and monitor usage."}],
+  "realWorldUsage": [],
+  "productionSection": {"cicd":"Integrate Terraform or CloudFormation with CI to manage infrastructure changes safely.","monitoring":"Use CloudWatch metrics and alarms; centralize logs in CloudWatch Logs or external services."},
+  "labs": [{"title":"Deploy a Static Site to S3","description":"Host a static website on S3 with CloudFront CDN","estimatedTime":"20 minutes","steps":[{"title":"Create S3 bucket","instruction":"Enable static website hosting and upload files"},{"title":"Add CloudFront","instruction":"Create distribution with S3 origin"}],"expectedOutput":"Website served from CloudFront with HTTPS"}],
+  "interviewQuestions": [{"question":"When would you use Lambda over EC2?","difficulty":"Easy","answer":"Use Lambda for short-lived, event-driven workloads where you don't want to manage servers; choose EC2 for long-running or highly specialized workloads."}],
+  "cheatsheet": {
+    "core_aws_commands": [
+      {"cmd": "aws configure", "description": "Set up AWS CLI credentials and default region"},
+      {"cmd": "aws sts get-caller-identity", "description": "Verify the current AWS identity"},
+      {"cmd": "aws s3 ls", "description": "List S3 buckets you can access"},
+      {"cmd": "aws ec2 describe-instances", "description": "Inspect running EC2 instances"}
+    ],
+    "deployment_tips": [
+      "Use IAM roles instead of long-lived access keys whenever possible",
+      "Prefer managed services like S3, RDS, and Lambda to reduce ops overhead",
+      "Tag resources consistently for cost tracking and automation"
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "hero": {
+    "heading": "🔨 Jenkins - Automate Your Entire DevOps Pipeline",
+    "subtitle": "Build, test, and deploy applications automatically on every code change with zero manual intervention.",
+    "difficulty": "Intermediate",
+    "timeToLearn": "4-5 hours",
+    "keySkill": "Essential for CI/CD",
+    "whyLearn": "Most used CI/CD tool in the world. Powers millions of deployments daily. If you do DevOps, you need Jenkins.",
+    "icon": "🔨"
+  },
+  "storytelling": {
+    "problem": "Every code change needs manual building, testing, and deploying. Mistakes happen. Takes hours. Your team wastes time on repetitive tasks.",
+    "solution": "Jenkins automates everything. Code pushed → auto-builds → auto-tests → auto-deploys. Errors caught instantly. Fast feedback loop.",
+    "analogy": "Jenkins is a factory assembly line. Code goes in one end, tested product comes out the other, automatically. Quality gates prevent bad products from shipping.",
+    "realWorldExample": "Netflix uses Jenkins to deploy thousands of times per day with zero downtime. Every code change triggers automated testing and deployment.",
+    "deepDive": "Jenkins uses plugins for endless integration possibilities with Git, Docker, Kubernetes, AWS, Slack. Master-agent architecture scales to thousands of jobs running in parallel."
+  },
+  "architectureFlow": [
+    {
+      "icon": "📝",
+      "title": "Define Pipeline",
+      "description": "Write Jenkinsfile describing build, test, deploy stages",
+      "details": "Declarative or scripted pipeline defines your entire process. Version controlled alongside code."
+    },
+    {
+      "icon": "🔗",
+      "title": "Trigger on Event",
+      "description": "Jenkins watches Git repo. On push, automatically runs pipeline.",
+      "details": "Webhooks notify Jenkins instantly when code changes. Branch-specific pipelines for dev/staging/prod."
+    },
+    {
+      "icon": "🧪",
+      "title": "Build & Test",
+      "description": "Compile code, run unit tests, integration tests, security scans",
+      "details": "Fail fast if tests fail. Don't proceed to deploy. Parallel test execution speeds up feedback."
+    },
+    {
+      "icon": "🚀",
+      "title": "Deploy",
+      "description": "If all tests pass, automatically deploy to production",
+      "details": "Zero downtime deployments with blue-green or canary strategies. Auto-rollback on failures."
+    }
+  ],
+  "learningPath": {
+    "beginner": [
+      {"topic": "Pipelines", "description": "Define build/test/deploy stages as code in Jenkinsfile"},
+      {"topic": "Agents", "description": "Distribute builds across multiple machines"},
+      {"topic": "Plugins", "description": "Extend Jenkins with Git, Docker, Kubernetes integration"},
+      {"topic": "Credentials", "description": "Store passwords, tokens securely for production deployments"},
+      {"topic": "Webhooks", "description": "Auto-trigger pipelines on Git push events"}
+    ],
+    "intermediate": [
+      {"topic": "Groovy Scripting", "description": "Write complex logic in Jenkinsfile for conditional deployments"},
+      {"topic": "Shared Libraries", "description": "Reuse pipeline code across jobs to reduce duplication"},
+      {"topic": "BlueOcean UI", "description": "Modern UI for visualizing pipelines and logs"},
+      {"topic": "Notifications", "description": "Alert teams on build success/failure via Slack, email"},
+      {"topic": "Artifact Management", "description": "Store build outputs, test reports for later analysis"}
+    ],
+    "advanced": [
+      {"topic": "Kubernetes Integration", "description": "Run builds in K8s pods for dynamic scaling"},
+      {"topic": "GitOps", "description": "Deploy using declarative configuration from Git"},
+      {"topic": "Security Scanning", "description": "Integrate SAST, DAST, dependency checks into pipeline"},
+      {"topic": "Multi-branch Pipelines", "description": "Auto-create jobs for Git branches with different deployments"},
+      {"topic": "Performance Optimization", "description": "Cache dependencies, parallelize builds to speed up feedback"}
+    ]
+  },
+  "commands": [
+    {
+      "cmd": "jenkins-cli -s http://jenkins:8080 build job-name",
+      "description": "Trigger a Jenkins job remotely",
+      "whatItDoes": "Starts a build of the specified job immediately",
+      "realUseCase": "Trigger deployments from scripts or other tools. Automate cross-system workflows.",
+      "example": "jenkins-cli -s http://jenkins:8080 build my-app-deploy",
+      "commonMistake": "Not specifying the correct Jenkins URL results in connection refused errors",
+      "difficulty": "Intermediate"
+    },
+    {
+      "cmd": "pipeline { agent any; stages { stage('Build') { steps { sh 'npm run build' } } } }",
+      "description": "Define a declarative Jenkins pipeline",
+      "whatItDoes": "Creates a multi-stage pipeline with defined jobs and steps",
+      "realUseCase": "Industry standard way to define CI/CD workflows. Version controlled in Jenkinsfile.",
+      "example": "Jenkinsfile in git repo automatically triggers on commit",
+      "commonMistake": "Mixing declarative and scripted syntax causes syntax errors",
+      "difficulty": "Beginner"
+    },
+    {
+      "cmd": "post { always { junit 'test-results.xml' } }",
+      "description": "Collect test results after build completes",
+      "whatItDoes": "Parses JUnit XML and displays test results in UI",
+      "realUseCase": "Visualize test results, track trends, fail builds if tests fail",
+      "example": "Jenkins shows pass/fail rate, allows drilling into failed tests",
+      "commonMistake": "Not collecting results means test failures are missed",
+      "difficulty": "Intermediate"
+    },
+    {
+      "cmd": "withCredentials([usernamePassword(credentialsId: 'docker-hub')]) { sh 'docker push' }",
+      "description": "Use stored credentials securely in pipeline",
+      "whatItDoes": "Injects credentials as environment variables without exposing in logs",
+      "realUseCase": "Push Docker images to registry, deploy to cloud, authenticate to databases",
+      "example": "Jenkins masks credential values in build logs automatically",
+      "commonMistake": "Hardcoding credentials in Jenkinsfile exposes secrets to everyone",
+      "difficulty": "Advanced"
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "Jenkins vs GitLab CI vs GitHub Actions",
+      "left": {
+        "name": "🔨 Jenkins",
+        "points": ["Most powerful and flexible CI/CD tool", "Huge plugin ecosystem (1800+ plugins)", "Self-hosted, full control", "Complex setup and maintenance"]
+      },
+      "right": {
+        "name": "🦊 GitLab CI / ✅ GitHub Actions",
+        "points": ["Built into Git platform (simpler workflow)", "Less plugins but tightly integrated", "Managed service (no maintenance)", "Limited customization compared to Jenkins"]
+      },
+      "whenToUse": "Use Jenkins for large enterprises with complex requirements. Use GitHub Actions for small teams. Use GitLab CI if you use GitLab."
+    }
+  ],
+  "beginnerMistakes": [
+    {"title": "Hardcoding Secrets in Jenkinsfile", "description": "Passwords visible in version control and build logs. Everyone can see them.", "howToFix": "Use Jenkins Credentials Store. Inject via withCredentials(). Never commit secrets."},
+    {"title": "Not Setting Build Timeouts", "description": "Hanging builds consume resources and block other jobs. Pipelines run forever if stuck.", "howToFix": "Set timeout(time: 30, unit: 'MINUTES') in pipeline. Kill hung builds automatically."}
+  ],
+  "realWorldUsage": [
+    {"name": "Netflix", "logo": "🎬", "industry": "Streaming", "usage": "Netflix uses Jenkins to deploy code thousands of times per day with automated testing."},
+    {"name": "Google", "logo": "🔍", "industry": "Tech Giant", "usage": "Google uses Jenkins for CI/CD pipelines across internal tools and infrastructure."},
+    {"name": "LinkedIn", "logo": "💼", "industry": "Social Network", "usage": "LinkedIn relies on Jenkins for continuous deployment of microservices."}
+  ],
+  "productionSection": {
+    "scaling": "Use Jenkins agents to distribute builds. Kubernetes plugin scales agents dynamically. Parallelized stages reduce pipeline time.",
+    "security": "Use Credentials Store for secrets. RBAC to control access. Regular backups of Jenkins configuration. Scan dependencies for vulnerabilities.",
+    "monitoring": "Monitor Jenkins server health (disk, memory, CPU). Track build trends and failures. Alert on long-running builds.",
+    "cicd": "Use shared libraries for reusable code. Version control Jenkinsfiles. Implement code review gates. Automated testing before merging."
+  },
+  "labs": [{"title": "Create Your First Pipeline", "description": "Build a simple pipeline that compiles code and runs tests", "estimatedTime": "20 minutes", "steps": [{"title": "Create Jenkinsfile", "instruction": "Write Jenkinsfile with Build and Test stages"}, {"title": "Create Jenkins Job", "instruction": "Point to Git repo with Jenkinsfile"}, {"title": "Trigger Build", "instruction": "Push code and watch pipeline run"}], "expectedOutput": "Pipeline completes successfully with test results visible"}],
+  "interviewQuestions": [
+    {"question": "What is the difference between declarative and scripted pipelines?", "difficulty": "Intermediate", "answer": "Declarative uses simpler syntax for common use cases. Scripted uses Groovy for complex logic. Declarative is easier; scripted is more powerful.", "example": "Use declarative for standard build/test/deploy. Use scripted for conditional logic.", "followUp": "When would you choose scripted over declarative?", "tips": ["Mention syntax simplicity of declarative", "Explain Groovy power of scripted", "Talk about readability vs flexibility"]}
+  ],
+  "cheatsheet": {
+    "pipeline_commands": [
+      {"cmd": "stage('Name') { steps { sh 'command' } }", "description": "Define a pipeline stage"},
+      {"cmd": "parallel { stage1 { ... } stage2 { ... } }", "description": "Run stages in parallel"},
+      {"cmd": "post { always { ... } }", "description": "Run after all stages complete"}
+    ],
+    "useful_snippets": [
+      {"cmd": "timeout(time: 30, unit: 'MINUTES') { ... }", "description": "Set maximum execution time"},
+      {"cmd": "withCredentials([usernamePassword(...)]) { ... }", "description": "Use stored credentials securely"},
+      {"cmd": "sh 'npm test'", "description": "Execute shell command"}
+    ]
+  }
+}

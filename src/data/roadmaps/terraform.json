@@ -1,0 +1,22 @@
+{
+  "title":"Terraform Roadmap",
+  "subtitle":"Infrastructure as Code best practices.",
+  "estimated":"2-3 weeks",
+  "progress":15,
+  "beginner":[
+    {"title":"Providers","difficulty":"Beginner","description":"Configure providers (AWS, GCP).","time":"1 day","useCase":"Connect Terraform to cloud","project":"Initialize a provider and create a resource"},
+    {"title":"Resources","difficulty":"Beginner","description":"Declare resources in HCL.","time":"1 day","useCase":"Create VMs and networks","project":"Provision a VM or S3 bucket"},
+    {"title":"Variables & Outputs","difficulty":"Beginner","description":"Parameterize configs.","time":"1 day","useCase":"Reusable modules","project":"Create variables and outputs"}
+  ],
+  "intermediate":[
+    {"title":"Modules","difficulty":"Intermediate","description":"Encapsulate reusable infra.","time":"2 days","useCase":"DRY infra","project":"Create a module for networking"},
+    {"title":"Remote State","difficulty":"Intermediate","description":"Use remote backends for team collaboration.","time":"1 day","useCase":"Shared state","project":"Configure S3 backend with locking"}
+  ],
+  "advanced":[
+    {"title":"Workspaces & CI/CD","difficulty":"Advanced","description":"Manage envs and integrate with pipelines.","time":"2 days","useCase":"Safe deployments","project":"Add Terraform to CI pipeline"},
+    {"title":"Testing & Policy","difficulty":"Advanced","description":"Terratest and policy-as-code.","time":"3 days","useCase":"Compliance and correctness","project":"Write a basic Terratest suite"}
+  ],
+  "production":[
+    {"title":"Production IaC","difficulty":"Production","description":"Scale, governance, and drift management.","time":"3 days","useCase":"Manage prod infra","project":"Implement infra promotion workflows"}
+  ]
+}

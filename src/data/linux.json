@@ -1,0 +1,19 @@
+{
+  "id": "linux",
+  "title": "Linux",
+  "summary": "Operating system fundamentals for cloud engineers.",
+  "why": "Servers and containers mostly run on Linux; shell skills are essential.",
+  "architecture": "Kernel, userland, init systems, networking stack.",
+  "use_cases": ["Server administration","Scripting"],
+  "install": ["# Basic packages","sudo apt update && sudo apt install -y build-essential git curl"],
+  "commands": [
+    {"cmd":"ls -la","desc":"List files"},
+    {"cmd":"sudo systemctl status nginx","desc":"Check service status"}
+  ],
+  "best_practices": ["Use non-root user","Automate via scripts"],
+  "common_mistakes": ["Editing prod config without backup"],
+  "examples": ["User management and permissions"],
+  "mini_projects": ["Create setup scripts for dev VM"],
+  "interview_questions": ["Explain permissions and umask"],
+  "deployment_workflow": ["Prepare images -> configure with cloud-init -> boot"]
+}

@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "heading": "📊 Grafana - Visualize Your Metrics",
+    "subtitle": "Build rich dashboards, explore telemetry, and get answers from your metrics and traces.",
+    "difficulty": "Beginner",
+    "timeToLearn": "2-3 hours",
+    "keySkill": "Observability",
+    "whyLearn": "Grafana is the standard visualization layer in cloud-native stacks. It's used to turn raw telemetry into actionable insights.",
+    "icon": "📊"
+  },
+  "storytelling": {
+    "problem": "You have a running service but you can't tell why latency spikes or which component is failing. Logs are noisy and you need a quick signal.",
+    "solution": "Grafana connects to metrics, traces, and logs backends and provides dashboards, alerts, and exploration tools so you can quickly find patterns and root causes.",
+    "analogy": "Grafana is like the cockpit of a plane—pilots don't inspect each mechanical part when something goes wrong; they read the instruments to understand what's happening immediately.",
+    "realWorldExample": "Teams use Grafana to correlate CPU, request latency, and error rates on a single dashboard to identify the microservice causing an outage within minutes.",
+    "deepDive": "Grafana supports many data sources (Prometheus, Loki, Elasticsearch, Graphite, InfluxDB, Jaeger). Dashboards are composed of panels with queries and visualizations. Features include templating, annotations, alerting, and Loki for logs." 
+  },
+  "architectureFlow": [
+    {"icon":"🔌","title":"Connect Data Sources","description":"Add Prometheus, Loki, Elasticsearch, or cloud metrics as data sources","details":"Grafana queries backend stores on demand; panels use queries to render charts and tables."},
+    {"icon":"📈","title":"Create Dashboards","description":"Compose panels displaying metrics, logs, and traces","details":"Use queries, transformations, and variables to build reusable dashboards for SLOs, performance, and reliability."},
+    {"icon":"🔔","title":"Set Alerts","description":"Turn thresholds and query results into alerts","details":"Grafana Alerting evaluates rules and integrates with notification channels (Slack, PagerDuty, email)."},
+    {"icon":"👥","title":"Share & Collaborate","description":"Publish dashboards and create snapshots for stakeholders","details":"Dashboards can be templated and shared across teams; RBAC controls access."}
+  ],
+  "learningPath": {
+    "beginner": [
+      {"topic":"Add a Data Source","description":"Connect Prometheus or your cloud provider metrics to Grafana."},
+      {"topic":"Build a Dashboard","description":"Create a simple dashboard with a graph and a singlestat panel."},
+      {"topic":"Use Variables","description":"Parameterize dashboards to view metrics across services or environments."},
+      {"topic":"Explore Query Inspector","description":"Inspect queries and datasource responses to debug panel data."}
+    ],
+    "intermediate": [
+      {"topic":"Dashboards as Code","description":"Manage dashboards with JSON or provisioning to keep them in Git."},
+      {"topic":"Alerting","description":"Write alert rules and connect notification channels."},
+      {"topic":"Transformations","description":"Transform query results in Grafana UI to shape data for visualization."}
+    ],
+    "advanced": [
+      {"topic":"Pluggable Panels and Plugins","description":"Use or build community plugins for custom visualizations."},
+      {"topic":"Scale & HA","description":"Run Grafana behind a load balancer with a durable backend for sessions and data sources."}
+    ]
+  },
+  "title": "Grafana",
+  "intro": {
+    "what": "Grafana is an open-source platform for analytics and monitoring that lets you query, visualize, alert on, and explore your metrics and logs.",
+    "why": "Visualizing telemetry helps teams spot trends, regressions, and root causes quickly. Grafana unifies multiple backends with a single dashboarding UX.",
+    "problems_solved": ["Siloed metrics and logs","Hard-to-read dashboards","Slow incident investigation"],
+    "industry_importance": "Grafana is widely adopted across startups and enterprises as the standard dashboarding layer for observability." 
+  },
+  "commands": [],
+  "comparisons": [],
+  "beginnerMistakes": [
+    {"title":"Too Many Panels","description":"Overloading dashboards makes them slow and hard to read.","howToFix":"Create focused dashboards per SLO and use templating/variables."}
+  ],
+  "realWorldUsage": [],
+  "productionSection": {"monitoring":"Use Grafana with Prometheus for metrics and Loki for logs; back up dashboards; use RBAC for team access."},
+  "labs": [{"title":"Build a Service Dashboard","description":"Create a dashboard for a sample microservice using Prometheus metrics","estimatedTime":"20 minutes","steps":[{"title":"Connect Prometheus","instruction":"Add Prometheus data source to Grafana"},{"title":"Add Panels","instruction":"Create graphs for request rate, error rate, and latency"}],"expectedOutput":"Dashboard shows live metrics for the sample service"}],
+  "interviewQuestions": [{"question":"What is Grafana used for?","difficulty":"Easy","answer":"Visualizing and alerting on metrics, logs, and traces from multiple backends."}],
+  "cheatsheet": {
+    "dashboard_shortcuts": [
+      {"cmd": "Dashboards > New > New dashboard", "description": "Create a new dashboard from the Grafana UI"},
+      {"cmd": "Panel > Query inspector", "description": "Inspect query results and backend responses"},
+      {"cmd": "Variables > Add variable", "description": "Build reusable, parameterized dashboards"},
+      {"cmd": "Alerting > Contact points", "description": "Configure where alerts should be sent"}
+    ],
+    "usage_tips": [
+      "Use templating variables to switch between environments and services",
+      "Keep dashboards focused on one SLO or one service area",
+      "Pair Grafana with Prometheus for metrics and Loki for logs"
+    ]
+  }
+}

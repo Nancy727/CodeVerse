@@ -1,0 +1,125 @@
+{
+  "id": "kubernetes",
+  "title": "Kubernetes",
+  "intro": {
+    "what": "Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.",
+    "why": "It abstracts container orchestration concerns (deployment, scaling, networking, and resilience) and provides declarative APIs to manage complex distributed systems.",
+    "problems_solved": ["Automated scheduling and scaling of containers","Service discovery and load balancing","Self-healing of failed containers","Declarative rollout and rollback"],
+    "industry_importance": "Kubernetes is the de-facto standard for container orchestration across cloud providers and on-premises, enabling portability and large-scale microservices architectures."
+  },
+  "architecture": {
+    "core_components": ["Control Plane (API Server, Controller Manager, Scheduler)","etcd (cluster store)","Kubelet (node agent)","Kube-proxy (networking)","Container runtime (containerd, Docker)","CNI plugins (Calico, Flannel)"],
+    "workflow_explanation": "Users declare desired state using manifests (Deployments, Services, StatefulSets). The API Server persists state in etcd. The Scheduler assigns pods to nodes, Kubelet starts containers using the runtime, and Controllers reconcile actual state to desired state.",
+    "request_flow": "kubectl -> API Server -> etcd validation -> Scheduler & Controllers -> Kubelet on node -> container runtime -> pod starts.",
+    "internal_working": "Controllers watch API server resources, create/update objects, and ensure observed state matches the desired state through reconciliation loops.",
+    "production_architecture": "High-availability control plane across multiple master nodes, etcd clustered with backup strategy, secure RBAC, network policies, ingress controllers, and monitoring/alerting stack.",
+    "scaling_architecture": "Use Horizontal Pod Autoscaler (HPA) for pod scaling, Cluster Autoscaler for node scale, and custom metrics for complex policies." 
+  },
+  "real_world_use_cases": {
+    "enterprise": ["Run tens to thousands of microservices with team-based namespaces and quotas","Platform engineering to provide self-service clusters"],
+    "startup": ["Rapid iteration of services with GitOps and small clusters","Leverage managed Kubernetes services (EKS/GKE/AKS) to reduce ops burden"],
+    "cloud_native": ["Service meshes, observability pipelines, and event-driven architectures"],
+    "production_scenarios": ["Multi-tenant clusters with network policies and resource quotas","Hybrid-cloud clusters with federation or multi-cluster controllers"]
+  },
+  "installation": {
+    "windows": ["Install kubectl via choco: choco install kubernetes-cli","Use Docker Desktop with Kubernetes enabled for local testing"],
+    "linux": ["Download kubectl: curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl","chmod +x kubectl && sudo mv kubectl /usr/local/bin/"],
+    "ubuntu": ["sudo snap install microk8s --classic","microk8s status --wait-ready","microk8s enable dns dashboard storage"],
+    "macos": ["brew install kubectl","Or install Docker Desktop with Kubernetes or use minikube: brew install minikube"],
+    "cloud_setup": ["Use managed control planes: AWS EKS, GCP GKE, Azure AKS","Follow provider guides to create node pools, set IAM roles, and configure networking (VPC/CNI)"]
+  },
+  "commands": [
+    {"cmd":"kubectl version --client","explanation":"Show kubectl client version","use_case":"Verify kubectl installation","example_output":"Client Version: v1.28.0","best_practice":"Match kubectl client with server minor version when possible"},
+    {"cmd":"kubectl config view","explanation":"View kubeconfig settings","use_case":"Debug cluster contexts and auth","example_output":"apiVersion: v1\nclusters:\n- cluster:\n  name: ...","best_practice":"Use contexts to switch between clusters"},
+    {"cmd":"kubectl get nodes","explanation":"List nodes in the cluster","use_case":"Check node readiness and capacity","example_output":"NAME STATUS ROLES AGE VERSION","best_practice":"Monitor node conditions to detect issues early"},
+    {"cmd":"kubectl get pods -A","explanation":"List all pods across namespaces","use_case":"Overview of workloads","example_output":"NAMESPACE POD NAME READY STATUS","best_practice":"Filter by namespace for focused troubleshooting"},
+    {"cmd":"kubectl describe pod <pod> -n <ns>","explanation":"Detailed pod information including events","use_case":"Investigate crash loops and scheduling issues","example_output":"Events:\n  Type Reason Message","best_practice":"Check events before logs to identify scheduling issues"},
+    {"cmd":"kubectl logs <pod> -c <container>","explanation":"Fetch logs from a container","use_case":"Application debugging","example_output":"INFO Starting server","best_practice":"Use '-f' to follow logs and aggregate with central logging in prod"},
+    {"cmd":"kubectl exec -it <pod> -n <ns> -- /bin/sh","explanation":"Open shell inside a pod","use_case":"Runtime inspection and debugging","example_output":"# ps aux","best_practice":"Minimize exec usage; rely on replicable debugging steps and local images"},
+    {"cmd":"kubectl apply -f deployment.yaml","explanation":"Create or update resources from manifest","use_case":"Declarative deployments","example_output":"deployment.apps/myapp configured","best_practice":"Use 'kubectl diff' or CI validation before apply"},
+    {"cmd":"kubectl rollout status deployment/myapp -n <ns>","explanation":"Watch rollout progress","use_case":"Validate deployment success","example_output":"deployment \"myapp\" successfully rolled out","best_practice":"Integrate readiness/liveness probes to control rollouts"},
+    {"cmd":"kubectl rollout undo deployment/myapp","explanation":"Rollback to previous ReplicaSet","use_case":"Quick rollback on faulty release","example_output":"deployment.apps/myapp reverted to revision 2","best_practice":"Keep deployment history by using 'kubectl rollout history'"},
+    {"cmd":"kubectl get svc","explanation":"List services","use_case":"Check service endpoints and types","example_output":"NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S)","best_practice":"Use ClusterIP for internal services, LoadBalancer for external exposure"},
+    {"cmd":"kubectl port-forward svc/myapp 8080:80","explanation":"Forward local port to service","use_case":"Local debugging of in-cluster service","example_output":"Forwarding from 127.0.0.1:8080 -> 80","best_practice":"Use this for local dev only; not for production traffic"},
+    {"cmd":"kubectl cp ./file.txt mypod:/tmp/file.txt -n <ns>","explanation":"Copy files to/from pods","use_case":"Inject configuration for tests","example_output":"file.txt copied","best_practice":"Prefer ConfigMaps/Secrets for config injection"},
+    {"cmd":"kubectl apply -f - <<EOF\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: test\nEOF","explanation":"Create resources from heredoc","use_case":"Quick local manifest creation","example_output":"namespace/test created","best_practice":"Use proper manifests in repo, not ad-hoc commands"},
+    {"cmd":"kubectl top nodes","explanation":"Show resource usage of nodes (requires metrics-server)","use_case":"Quick capacity check","example_output":"NAME CPU(cores) CPU% MEMORY(%)","best_practice":"Install cluster metrics provider for autoscaling"},
+    {"cmd":"kubectl top pods -A","explanation":"Show pod resource usage","use_case":"Spot heavy pods","example_output":"NAMESPACE POD CPU(Mi) MEMORY(Mi)","best_practice":"Use HPA based on custom metrics when needed"},
+    {"cmd":"kubectl apply -f hpa.yaml","explanation":"Apply HorizontalPodAutoscaler","use_case":"Autoscale based on CPU or custom metrics","example_output":"horizontalautoscaler.autoscaling/myapp created","best_practice":"Test HPA under load in staging"},
+    {"cmd":"kubectl create secret generic my-secret --from-literal=key=val -n <ns>","explanation":"Create a generic secret","use_case":"Store small secrets","example_output":"secret/my-secret created","best_practice":"Use external secret stores (Vault, AWS Secrets Manager) for production"},
+    {"cmd":"kubectl apply -f ingress.yaml","explanation":"Create ingress resource","use_case":"Configure HTTP routing to services","example_output":"ingress.networking.k8s.io/my-ingress created","best_practice":"Use ingress controllers (NGINX, Traefik) and TLS via cert-manager"},
+    {"cmd":"kubectl get events -n <ns>","explanation":"List recent events in namespace","use_case":"Troubleshoot scheduling or resource issues","example_output":"LAST SEEN TYPE REASON OBJECT MESSAGE","best_practice":"Correlate events with logs for root cause"},
+    {"cmd":"kubectl label node <node> role=worker","explanation":"Label node for scheduling constraints","use_case":"Node selection for workloads","example_output":"node/<node> labeled","best_practice":"Use taints and tolerations for node isolation"},
+    {"cmd":"kubectl taint nodes node1 key=value:NoSchedule","explanation":"Taint node to prevent scheduling","use_case":"Reserve nodes for special workloads","example_output":"node/node1 tainted","best_practice":"Document taints to avoid confusion among teams"},
+    {"cmd":"kubectl get pods -o wide","explanation":"Show pods with node and IP information","use_case":"Identify pod placement","example_output":"POD NAME NODE IP","best_practice":"Combine with 'kubectl describe' for deeper context"},
+    {"cmd":"kubectl apply -f statefulset.yaml","explanation":"Create stateful sets for stateful apps","use_case":"Databases requiring stable identities and storage","example_output":"statefulset.apps/db created","best_practice":"Use PersistentVolumes and storage classes for durable storage"},
+    {"cmd":"kubectl get pvc -n <ns>","explanation":"List PersistentVolumeClaims","use_case":"Check storage provisioning","example_output":"NAME STATUS VOLUME CAPACITY","best_practice":"Use dynamic provisioning with StorageClasses in cloud environments"},
+    {"cmd":"kubectl proxy --port=8001","explanation":"Create local proxy to API server","use_case":"Access API from workstation","example_output":"Starting to serve on 127.0.0.1:8001","best_practice":"Use kubectl proxy for local dev only"},
+    {"cmd":"kubectl explain deployment","explanation":"Show resource documentation","use_case":"Explore resource schema","example_output":"KIND: Deployment\nDESCRIPTION: ...","best_practice":"Use 'kubectl explain' to learn fields before editing manifests"},
+    {"cmd":"kubectl get clusterrolebinding","explanation":"List cluster-wide RBAC bindings","use_case":"Audit privileges","example_output":"NAME AGE","best_practice":"Follow least privilege and use roles per namespace"},
+    {"cmd":"kubectl auth can-i create deployments -n <ns>","explanation":"Check RBAC permissions for current user","use_case":"Validate access before performing action","example_output":"yes/no","best_practice":"Use service accounts for automation"},
+    {"cmd":"kubectl scale deployment myapp --replicas=5 -n <ns>","explanation":"Scale deployment replicas","use_case":"Manual scaling for maintenance","example_output":"deployment.apps/myapp scaled","best_practice":"Prefer HPA for automatic scaling based on metrics"},
+    {"cmd":"kubectl proxy --www=./static --port=8001","explanation":"Serve local static files via proxy to API server (advanced)","use_case":"Local development integration","example_output":"Serving on 127.0.0.1:8001","best_practice":"Keep local integrations reproducible"},
+    {"cmd":"kubectl apply -k ./kustomize","explanation":"Apply kustomize overlays","use_case":"Manage environment-specific overlays","example_output":"namespace/test created","best_practice":"Use kustomize or Helm for templating instead of ad-hoc scripting"},
+    {"cmd":"kubectl get apiservices","explanation":"List aggregated API services","use_case":"Check availability of CRDs and aggregated APIs","example_output":"NAME SERVICE AVAILABLE","best_practice":"Monitor CRDs for compatibility during upgrades"},
+    {"cmd":"kubectl get crd","explanation":"List CustomResourceDefinitions","use_case":"Discover installed operators and APIs","example_output":"NAME CREATED","best_practice":"Limit CRDs to required operators to reduce cluster complexity"},
+    {"cmd":"kubectl cordon <node>","explanation":"Mark node unschedulable","use_case":"Drain or maintenance","example_output":"node/<node> cordoned","best_practice":"Use 'drain' to gracefully migrate workloads"},
+    {"cmd":"kubectl drain <node> --ignore-daemonsets --delete-local-data","explanation":"Evict pods and prepare node for maintenance","use_case":"Node reboots or upgrades","example_output":"node/<node> drained","best_practice":"Coordinate with SRE to avoid cascading disruptions"}
+  ],
+  "best_practices": {
+    "security": ["Enable RBAC and NetworkPolicies","Use Pod Security Standards and Admission Controllers","Rotate and restrict kubeconfig credentials"],
+    "scalability": ["Design apps to be stateless where possible","Use HPA and Cluster Autoscaler","Partition workloads across node pools"],
+    "monitoring": ["Install Prometheus, Alertmanager and Grafana","Collect node, pod, and application metrics and alerts"],
+    "performance": ["Tune kubelet eviction thresholds","Right-size resource requests and limits"],
+    "naming_conventions": ["Use standard labels (app, component, tier)","Prefix namespaces by team or environment"]
+  },
+  "common_errors_and_fixes": [
+    {"error":"CrashLoopBackOff","cause":"Application failing on start","fix":"kubectl logs and describe to inspect startup errors; replicate locally and fix"},
+    {"error":"ImagePullBackOff","cause":"Image missing or auth failure","fix":"Verify image repository, credentials, and image tag; docker pull locally to test"},
+    {"error":"Insufficient memory","cause":"Resource limits too low or node OOM","fix":"Inspect node and pod metrics; increase requests or add nodes"}
+  ],
+  "devops_integration": {
+    "ci_cd": "Use manifests in Git repos, validate with CI (kubeval/kind tests), build images in CI, and deploy with kubectl/helm/argoCD. Use image tags and immutable artifacts for rollbacks.",
+    "monitoring_stack": "Prometheus + Alertmanager + Grafana for metrics; Fluentd/Fluent Bit + Elasticsearch for logs; Jaeger/OpenTelemetry for traces.",
+    "cloud_infrastructure": "Use cloud provider integrations for load balancers, storage classes, and IAM roles. Manage nodes with managed node groups.",
+    "automation": "Adopt GitOps with ArgoCD or Flux for declarative, auditable deployments and drift detection."
+  },
+  "interview_questions": {
+    "beginner": ["What is Kubernetes?","What is a Pod?","What is a Service?"],
+    "intermediate": ["Explain Deployments vs StatefulSets","How does kube-scheduler choose a node?","What is etcd and why is it important?"],
+    "senior": ["Design an HA control plane and etcd topology","How would you handle multi-cluster networking and service discovery?","Explain how an operator works and when to use one."],
+    "scenario_based": ["You see high API server latency—how do you investigate?","Plan a migration of stateful DB from one cluster to another with minimal downtime."]
+  },
+  "mini_projects": {
+    "beginner": ["Deploy a 3-tier web application (frontend, API, DB) using Deployments and Services"],
+    "intermediate": ["Implement GitOps with ArgoCD and blue-green deployments"],
+    "production": ["Build multi-tenant clusters with network policies, resource quotas, and centralized observability stack"]
+  },
+  "architecture_diagrams": {
+    "kubernetes_cluster_html": "<div class=\"diagram\">\n  <div class='control-plane'>API Server -> Controller Manager -> Scheduler</div>\n  <div class='nodes'>\n    <div class='node'>Kubelet\nContainers</div>\n  </div>\n</div>",
+    "ci_cd_pipeline_html": "<div class=\"diagram\">CI -> Build Image -> Push Registry -> ArgoCD -> Kubernetes</div>"
+  },
+  "cheat_sheets": {
+    "commands": ["kubectl get pods","kubectl describe pod <pod>","kubectl logs <pod>","kubectl apply -f <file>"],
+    "tips": ["Use namespaces to isolate team resources","Prefer declarative manifests in Git for reproducibility"]
+  },
+  "learning_roadmap": {
+    "beginner": ["kubectl basics, YAML manifests, Deployments and Services"],
+    "intermediate": ["Helm/Operators, StatefulSets, PersistentVolumes, Networking (CNI)"],
+    "advanced": ["Cluster operations, etcd backups, multi-cluster architectures, custom controllers"],
+    "recommended_order": ["Linux -> Docker -> Kubernetes basics -> Helm -> GitOps -> Advanced cluster ops"]
+  },
+  "security": {
+    "vulnerabilities": ["Unrestricted access to API Server","Privileged containers"],
+    "secure_configurations": ["Enable RBAC, NetworkPolicies, PodSecurityAdmission","Encrypt etcd at rest and use TLS for all control plane communication"],
+    "secrets_management": "Use Secrets with encryption providers or external secret stores (Vault, AWS Secrets Manager)",
+    "rbac": "Grant least privilege to users and service accounts; use RoleBindings scoped to namespaces when possible"
+  },
+  "monitoring_observability": {
+    "logs": "Aggregate pod logs using Fluent Bit/Fluentd to Elasticsearch or cloud logging",
+    "metrics": "Scrape metrics from kube-state-metrics and node exporters; use Prometheus for alerting",
+    "tracing": "Instrument apps with OpenTelemetry and collect traces with Jaeger/Tempo",
+    "alerting": "Define SLOs and alerts in Alertmanager and route to on-call systems"
+  }
+}
+

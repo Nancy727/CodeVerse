@@ -1,0 +1,18 @@
+{
+  "id": "azure",
+  "title": "Azure",
+  "summary": "Microsoft Azure cloud provider.",
+  "why": "Provides compute, storage, networking and managed services.",
+  "architecture": "Regions, resource groups, subscriptions, resource providers.",
+  "use_cases": ["IaaS","PaaS","Managed databases"],
+  "install": ["# Install Azure CLI","curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"],
+  "commands": [
+    {"cmd":"az login","desc":"Authenticate to Azure"}
+  ],
+  "best_practices": ["Use resource groups","Use managed identities"],
+  "common_mistakes": ["Poor cost tagging","Over-provisioning resources"],
+  "examples": ["Deploy App Service"],
+  "mini_projects": ["Create a simple VM and connect"],
+  "interview_questions": ["What is an Azure resource group?"],
+  "deployment_workflow": ["Design infra -> Use ARM/Bicep/Terraform -> Deploy"]
+}

@@ -1,0 +1,20 @@
+{
+  "title":"Grafana & Monitoring Roadmap",
+  "subtitle":"Build dashboards and alerting to observe systems.",
+  "estimated":"1-2 weeks",
+  "progress":8,
+  "beginner":[
+    {"title":"Dashboards","difficulty":"Beginner","description":"Create basic dashboards with panels.","time":"1 day","useCase":"Visualize metrics","project":"Build a service dashboard"},
+    {"title":"Panels & Queries","difficulty":"Beginner","description":"Learn panel types and basic queries.","time":"1 day","useCase":"Explore metrics","project":"Create a graph and table panel"}
+  ],
+  "intermediate":[
+    {"title":"Variables & Templating","difficulty":"Intermediate","description":"Parameterize dashboards for reuse.","time":"1 day","useCase":"Multi-service dashboards","project":"Add variables for environment/service"},
+    {"title":"Alerting","difficulty":"Intermediate","description":"Create alert rules and notifications.","time":"1 day","useCase":"Detect incidents","project":"Create an alert for high error rate"}
+  ],
+  "advanced":[
+    {"title":"Dashboards as Code","difficulty":"Advanced","description":"Provision dashboards from JSON or Git.","time":"2 days","useCase":"Manage dashboards in CI","project":"Provision a dashboard via config"}
+  ],
+  "production":[
+    {"title":"Production Monitoring","difficulty":"Production","description":"SLOs, runbooks, and on-call strategies.","time":"3 days","useCase":"Operate reliably","project":"Define SLOs and create monitoring runbook"}
+  ]
+}

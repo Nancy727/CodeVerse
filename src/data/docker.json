@@ -1,0 +1,193 @@
+{
+  "hero": {
+    "heading": "🐳 Docker - Ship Your Code Anywhere",
+    "subtitle": "Package your application with everything it needs. Build once, run everywhere without surprises.",
+    "difficulty": "Beginner",
+    "timeToLearn": "3-4 hours",
+    "keySkill": "Essential for DevOps",
+    "whyLearn": "Docker is used by Netflix, Uber, Spotify, and Amazon. It solves the 'works on my machine but fails in production' problem once and for all.",
+    "icon": "🐳"
+  },
+  "storytelling": {
+    "problem": "You built an app on your Windows laptop. It works perfectly. You send it to your friend who uses Mac, and it breaks. You push it to the Linux server in production, and it crashes again. Why? Different systems have different libraries, versions, and configurations.",
+    "solution": "Docker packages your entire application—code, libraries, dependencies, and configuration—into a lightweight, portable container. This container runs identically on your laptop, your friend's Mac, or a production server in the cloud.",
+    "analogy": "Think of Docker like shipping cargo. Instead of putting your app in a box hoping the destination has the right tools to open it, Docker is like a sealed shipping container that contains everything inside—the app AND all tools needed to run it. When it arrives, everything works immediately.",
+    "realWorldExample": "Netflix streams to millions. Every time they update their service, they use Docker to package updates, test them, and deploy to thousands of servers worldwide—all identically. No surprises, no crashes.",
+    "deepDive": "Under the hood, Docker uses Linux containers (LXC) to isolate applications. Unlike VMs that simulate an entire OS (heavy!), containers share the host OS kernel but isolate filesystem and processes (light!). This makes Docker fast, efficient, and perfect for microservices."
+  },
+  "architectureFlow": [
+    {
+      "icon": "📝",
+      "title": "Write Dockerfile",
+      "description": "Create a recipe for your app (what base image, what to install, how to run it)",
+      "details": "A Dockerfile is like a blueprint. It defines the base OS, installs dependencies, copies your code, and specifies the startup command."
+    },
+    {
+      "icon": "🏗️",
+      "title": "Build Image",
+      "description": "Docker reads the Dockerfile and creates a reusable image (a snapshot of your app with everything)",
+      "details": "The image is a read-only template. It's not running yet—it's just a package ready to be deployed."
+    },
+    {
+      "icon": "📦",
+      "title": "Push to Registry",
+      "description": "Upload your image to Docker Hub or a private registry (like Amazon ECR or GitHub Packages)",
+      "details": "The registry is like a library. Anyone can pull your image and run it instantly, anywhere in the world."
+    },
+    {
+      "icon": "▶️",
+      "title": "Run Container",
+      "description": "Docker spins up a running instance of your image. Your app is now live!",
+      "details": "A container is a live instance. You can run multiple containers from the same image, and they're all isolated."
+    }
+  ],
+  "learningPath": {
+    "beginner": [
+      { "topic": "Images vs Containers", "description": "Images are blueprints; containers are running instances. Like a class and an object in programming." },
+      { "topic": "Dockerfile Basics", "description": "FROM, RUN, COPY, WORKDIR, EXPOSE, CMD—the essential commands to write a Dockerfile." },
+      { "topic": "Docker CLI Essentials", "description": "docker build, docker run, docker ps, docker logs—commands you'll use 80% of the time." },
+      { "topic": "Port Mapping", "description": "How to expose your container's port so you can access your app (-p 8080:3000 means localhost:8080 → container:3000)." },
+      { "topic": "Volumes & Persistence", "description": "How to mount directories so your data survives when containers are deleted." }
+    ],
+    "intermediate": [
+      { "topic": "Docker Compose", "description": "Run multi-container apps (frontend + database) with a single docker-compose.yml file." },
+      { "topic": "Container Networking", "description": "Connect multiple containers so they talk to each other (app container → database container)." },
+      { "topic": "Image Layers & Caching", "description": "Understand layer caching to speed up builds and reduce image size." },
+      { "topic": "Environment Variables", "description": "Pass configuration to containers without hardcoding secrets (-e NODE_ENV=production)." },
+      { "topic": "Custom Networks", "description": "Bridge, host, overlay—different network types for different use cases." }
+    ],
+    "advanced": [
+      { "topic": "Multi-Stage Builds", "description": "Create lightweight production images by separating build and runtime stages." },
+      { "topic": "BuildKit", "description": "Faster, smarter image building with parallel stages and caching." },
+      { "topic": "Rootless Containers", "description": "Run containers without root privileges for better security." },
+      { "topic": "Image Security", "description": "Sign images, scan for vulnerabilities, manage access control." },
+      { "topic": "Performance Optimization", "description": "Resource limits, CPU/memory tuning, monitoring container metrics." }
+    ]
+  },
+  "title": "Docker",
+  "intro": {
+    "what": "Docker is an open-source platform for automating the deployment, scaling, and management of applications inside lightweight software containers.",
+    "why": "Containers provide consistent runtime environments across development, test, and production. Docker standardizes packaging of applications, dependencies, and configuration into portable images.",
+    "problems_solved": [
+      "Dependency hell between environments",
+      "Inconsistent builds across developer machines and CI",
+      "Difficulties in packaging and deploying microservices",
+      "Inefficient use of host resources compared to VMs"
+    ],
+    "industry_importance": "Docker is foundational to modern cloud-native architectures, powering CI/CD pipelines, microservices deployments, local developer productivity, and multi-cloud portability."
+  },
+  "architecture": {
+    "core_components": ["Docker Engine (dockerd)", "Docker CLI (docker)", "Containerd", "OCI images", "Registries (Docker Hub, private registries)", "BuildKit"],
+    "workflow": "Developers write a Dockerfile that describes how to build an image. BuildKit builds the image layers and stores them in the local image store. Images are pushed to a registry. Runtimes pull images and run containers isolated by namespaces and cgroups.",
+    "request_flow": "User runs 'docker run' -> CLI talks to dockerd -> dockerd uses containerd to create container -> kernel namespaces and cgroups isolate process and resources -> container process starts.",
+    "production_architecture": "Images stored in a hardened registry, scanned for vulnerabilities, pulled by orchestrators (Kubernetes, ECS). Use immutable tags, image promotion workflows, signed image artifacts.",
+    "scaling_architecture": "Stateless containers scaled horizontally behind load balancers; persistent storage via volumes or external managed services; use orchestration (Kubernetes/ECS) for scheduling and autoscaling."
+  },
+  "real_world_use_cases": {
+    "enterprise_examples": [
+      "CI pipelines: build/test containers for each merge request",
+      "Microservices: each service packaged into its own container and deployed via orchestrator",
+      "Platform engineering: standardized base images for developer teams"
+    ],
+    "startup_examples": ["Fast iteration with local containers", "Deploy single-node containerized apps on cloud VMs"],
+    "cloud_native_use_cases": ["Sidecar patterns", "Service meshes with containerized proxies"],
+    "production_scenarios": ["Blue/Green or Canary deployments with container images", "Image promotion through CI -> registry -> staging -> production"]
+  },
+  "installation": {
+    "windows": ["Install Docker Desktop from https://www.docker.com/products/docker-desktop", "Enable WSL2 backend for best performance on Windows 10/11"],
+    "linux": ["Use official repo: curl -fsSL https://get.docker.com -o get-docker.sh; sh get-docker.sh", "Or use your distro package manager from official Docker repo"],
+    "ubuntu": ["sudo apt update", "sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release -y", "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /usr/share/keyrings/docker-archive-keyring.gpg", "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null", "sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io -y"],
+    "macos": ["Install Docker Desktop for Mac from https://www.docker.com/products/docker-desktop", "Enable virtualization and allocate resources in Docker Desktop preferences"],
+    "cloud_setup": ["Use managed container registry services (ECR, GCR, ACR) for storing images", "Harden registries with IAM and image scanning"]
+  },
+  "commands": [
+    {"cmd":"docker --version","explanation":"Show Docker CLI version","use_case":"Verify local Docker installation","example_output":"Docker version 24.0.2, build xxxxx","best_practice":"Pin version in CI images for repeatability"},
+    {"cmd":"docker info","explanation":"Show system-wide information","use_case":"Troubleshoot daemon and storage driver","example_output":"Containers: 3\n Images: 10\n Storage Driver: overlay2","best_practice":"Run as a user in docker group carefully; prefer rootless where possible"},
+    {"cmd":"docker pull nginx:latest","explanation":"Pull image from registry","use_case":"Pre-warm host with base image","example_output":"Downloaded newer image for nginx:latest","best_practice":"Avoid using 'latest' in production; use immutable tags"},
+    {"cmd":"docker build -t myapp:1.0 .","explanation":"Build image using Dockerfile in current directory","use_case":"Create reproducible artifact in CI","example_output":"Successfully built <sha>\nSuccessfully tagged myapp:1.0","best_practice":"Use multi-stage builds to keep images small"},
+    {"cmd":"docker images --format \"{{.Repository}}:{{.Tag}}\t{{.Size}}\"","explanation":"List local images with size","use_case":"Identify large images to clean up","example_output":"myapp:1.0\t120MB","best_practice":"Regularly prune unused images in CI runners"},
+    {"cmd":"docker run --name web -d -p 8080:80 nginx:stable","explanation":"Run container in detached mode mapping ports","use_case":"Run local service for testing","example_output":"<container-id>","best_practice":"Avoid exposing host ports in production; use service discovery"},
+    {"cmd":"docker ps -a","explanation":"List running and stopped containers","use_case":"Inspect container state","example_output":"CONTAINER ID\tIMAGE\tCOMMAND\tSTATUS","best_practice":"Use labels to add metadata for easier filtering"},
+    {"cmd":"docker logs -f web","explanation":"Follow container logs","use_case":"Debug runtime issues","example_output":"127.0.0.1 - - [..] \"GET / \" 200 -","best_practice":"Ship logs to centralized logging instead of relying on 'docker logs' in production"},
+    {"cmd":"docker exec -it web /bin/sh","explanation":"Open interactive shell inside container","use_case":"Inspect container filesystem/processes","example_output":"# ps aux","best_practice":"Minimize reliance on exec for debugging; prefer reproducing issues with local builds"},
+    {"cmd":"docker commit web myapp:debug","explanation":"Create new image from container state","use_case":"Capture transient state for debugging","example_output":"sha256:<id>","best_practice":"Use sparingly; prefer Dockerfile-driven reproducible builds"},
+    {"cmd":"docker save -o myapp.tar myapp:1.0","explanation":"Export image to tar archive","use_case":"Transfer images between air-gapped environments","example_output":"Saved image to myapp.tar","best_practice":"Use signed images for security in air-gapped flows"},
+    {"cmd":"docker load -i myapp.tar","explanation":"Import image from tar archive","use_case":"Restore previously exported image","example_output":"Loaded image: myapp:1.0","best_practice":"Verify image checksums after transfer"},
+    {"cmd":"docker tag myapp:1.0 repo.example.com/team/myapp:1.0","explanation":"Tag image for registry push","use_case":"Prepare image for registry","example_output":"Tagged myapp:1.0 as repo.example.com/team/myapp:1.0","best_practice":"Use canonical registry paths and consistent naming conventions"},
+    {"cmd":"docker push repo.example.com/team/myapp:1.0","explanation":"Push image to registry","use_case":"Publish artifact from CI","example_output":"Pushed 5/5 layers","best_practice":"Use CI service accounts and short-lived credentials"},
+    {"cmd":"docker rmi myapp:1.0","explanation":"Remove local image","use_case":"Reclaim disk space","example_output":"Untagged: myapp:1.0","best_practice":"Be cautious when removing images referenced by multiple tags"},
+    {"cmd":"docker rm web","explanation":"Remove container","use_case":"Cleanup stopped containers","example_output":"web","best_practice":"Use 'docker rm -f' when necessary but prefer graceful shutdown"},
+    {"cmd":"docker network ls","explanation":"List Docker networks","use_case":"Inspect user-defined bridge networks","example_output":"bridge\tlocal\t","best_practice":"Use user-defined bridge networks for service isolation"},
+    {"cmd":"docker network create --driver bridge isolated_net","explanation":"Create a user-defined bridge network","use_case":"Enable container name resolution and isolation","example_output":"<network-id>","best_practice":"Use explicit subnets when integrating with host networks"},
+    {"cmd":"docker volume create data_vol","explanation":"Create a named volume","use_case":"Persist service data","example_output":"data_vol","best_practice":"Prefer managed storage in production; use volumes for local dev and edge cases"},
+    {"cmd":"docker inspect web","explanation":"Return low-level information on container","use_case":"Debug networking, mounts, and environment variables","example_output":"JSON structure with details","best_practice":"Use 'docker inspect --format' to extract needed fields"},
+    {"cmd":"docker stats --no-stream","explanation":"Display resource usage for containers","use_case":"Quick performance check","example_output":"CONTAINER\tCPU %\tMEM USAGE / LIMIT","best_practice":"Integrate metrics with Prometheus instead of relying on docker stats in production"},
+    {"cmd":"docker system df","explanation":"Show disk usage","use_case":"Understand image and volume disk usage","example_output":"Images space usage: 1.2GB","best_practice":"Regular maintenance of build agents to avoid disk exhaustion"},
+    {"cmd":"docker system prune -f","explanation":"Remove unused data (containers, images, networks)","use_case":"Cleanup build servers","example_output":"Total reclaimed space: 500MB","best_practice":"Run with caution; prefer targeted prune in CI"},
+    {"cmd":"docker-compose up -d","explanation":"Start services defined in docker-compose.yml","use_case":"Local multi-container development","example_output":"Starting service_a ... done","best_practice":"Use Compose v2/BuildKit for faster builds"},
+    {"cmd":"docker-compose build --no-cache","explanation":"Rebuild images without cache","use_case":"Ensure fresh image layers","example_output":"Successfully built","best_practice":"Use during reproducible CI builds when necessary"},
+    {"cmd":"docker run --rm -v $(pwd):/app -w /app node:18 npm test","explanation":"Run tests inside a disposable container","use_case":"Isolate test environment","example_output":"All tests passed","best_practice":"Use consistent node image versions across CI and dev"},
+    {"cmd":"docker scan myapp:1.0","explanation":"Run vulnerability scan using Docker scan (Snyk)","use_case":"Identify CVEs in image layers","example_output":"No critical vulnerabilities found","best_practice":"Fail CI on critical vulnerabilities"},
+    {"cmd":"docker context create remote --docker \"{\"host\":\"ssh://user@host\"}\"","explanation":"Create a Docker context for remote daemon","use_case":"Operate multiple Docker endpoints","example_output":"Context 'remote' created","best_practice":"Use contexts to separate environments (dev/stage/prod)"},
+    {"cmd":"docker buildx create --use","explanation":"Create and use buildx builder for multi-arch images","use_case":"Build images for amd64 and arm64","example_output":"Created builder: default","best_practice":"Cache build layers in CI and push to registry"},
+    {"cmd":"docker buildx build --platform linux/amd64,linux/arm64 -t repo/myapp:1.0 --push .","explanation":"Build and push multi-arch image","use_case":"Support multiple CPU architectures","example_output":"Pushed manifest list","best_practice":"Test multi-arch images on target platforms"},
+    {"cmd":"docker login repo.example.com -u <user> -p <token>","explanation":"Authenticate to private registry","use_case":"CI pushing images","example_output":"Login Succeeded","best_practice":"Use short-lived tokens or credential stores"},
+    {"cmd":"docker trust sign repo/myapp:1.0","explanation":"Sign image for content trust","use_case":"Ensure image provenance","example_output":"Signed repository 'repo/myapp' tag: 1.0","best_practice":"Implement image signing as part of release pipeline"},
+    {"cmd":"docker manifest inspect repo/myapp:1.0","explanation":"Inspect manifest list for multi-arch images","use_case":"Verify architectures available","example_output":"{\"manifests\":[...]}","best_practice":"Use manifests to reference multi-arch images in orchestrators"},
+    {"cmd":"docker cp web:/usr/src/app/logs/log.txt ./log.txt","explanation":"Copy files from container to host","use_case":"Retrieve logs or data from container","example_output":"log.txt","best_practice":"Prefer centralized logging instead of ad-hoc file copy in production"},
+    {"cmd":"docker swarm init","explanation":"Initialize Docker Swarm mode for clustering","use_case":"Simple orchestration without Kubernetes","example_output":"Swarm initialized: current node (id)","best_practice":"Use Kubernetes for complex scheduling; Swarm for small footprint use cases"},
+    {"cmd":"docker service create --name web --replicas 3 -p 80:80 nginx","explanation":"Create a Swarm service","use_case":"Run replicated services in Swarm","example_output":"service created","best_practice":"Prefer orchestrators with strong ecosystem for production"}
+  ],
+  "best_practices": {
+    "security": ["Run containers as non-root when possible","Scan images for vulnerabilities before deploying","Use minimal base images (distroless/Alpine)"],
+    "scalability": ["Design stateless services for horizontal scaling","Externalize state to managed services or persistent volumes"],
+    "monitoring": ["Export metrics from apps for scraping (Prometheus)","Collect container-level metrics and logs centrally"],
+    "performance": ["Use multi-stage builds to reduce image size","Avoid large layers by combining commands carefully"],
+    "naming_conventions": ["Use registry/team/service:semver for images","Label containers with 'com.team' metadata"]
+  },
+  "common_errors_and_fixes": [
+    {"error":"permission denied while trying to connect to the Docker daemon socket","cause":"User not in docker group or daemon not running","fix":"Add the user to docker group (newgrp docker) or start dockerd with systemctl"},
+    {"error":"port is already allocated","cause":"Host port already in use","fix":"Use different host port or stop conflicting service"},
+    {"error":"image pull access denied","cause":"Unauthenticated or image private","fix":"docker login to the registry or check image path"}
+  ],
+  "devops_integration": {
+    "ci_cd": "Use Docker in CI to build images, run tests inside containers, push artifacts to a registry, and trigger deployments to orchestration platforms.",
+    "monitoring_stack": "Expose metrics, configure sidecars for logging, and add health checks to integrate with Prometheus/Grafana and ELK/Fluentd.",
+    "kubernetes": "Use Docker images in Kubernetes deployments; follow image tagging and promotion practices to move images across environments.",
+    "automation": "Automate image builds with BuildKit, sign images, and use deployment pipelines to promote images across environments."
+  },
+  "interview_questions": {
+    "beginner": ["What is a container?","How does Docker differ from a virtual machine?","What is a Dockerfile?"],
+    "intermediate": ["Explain Docker image layering.","How do you manage secrets in containers?","What is BuildKit?"],
+    "senior": ["Design an image promotion workflow for multiple environments.","How would you secure a container supply chain?","Explain rootless Docker and its trade-offs."],
+    "scenario_based": ["You have an image causing high CPU on production—how do you investigate?","Design a zero-downtime deployment strategy using Docker images." ]
+  },
+  "mini_projects": {
+    "beginner": ["Containerize a static website and serve it with nginx"],
+    "intermediate": ["Create a multi-container app with a database and web API using Docker Compose"],
+    "production": ["Implement CI pipeline to build, scan, sign, and promote Docker images across dev->staging->prod"]
+  },
+  "cheat_sheets": {
+    "quick_commands": ["docker build -t <name> .","docker run -d -p <host>:<container> <image>","docker ps -a","docker logs -f <container>"],
+    "tips": ["Use .dockerignore to avoid sending build context files","Prefer explicit tags instead of 'latest'"]
+  },
+  "learning_roadmap": {
+    "beginner": ["Understand containers and Dockerfile basics","Run containers locally"],
+    "intermediate": ["Learn multi-stage builds, networking, volumes, Compose"],
+    "advanced": ["Image signing, rootless Docker, multi-arch builds, supply chain security"],
+    "recommended_order": ["Linux basics -> Docker -> Docker Compose -> Kubernetes -> CI/CD"]
+  },
+  "security": {
+    "vulnerabilities": ["Use of outdated base images leading to CVEs","Overly permissive container runtime privileges"],
+    "secure_configurations": ["Run as non-root, use read-only filesystem when feasible, use seccomp and AppArmor profiles"],
+    "secrets_management": "Avoid embedding secrets in images. Use secrets APIs from orchestrators, inject at runtime, or use secret managers.",
+    "container_security": "Implement image scanning, runtime policies (e.g., OPA Gatekeeper), and minimal privileges.",
+    "rbac": "When running in orchestrators, leverage platform RBAC to reduce blast radius of compromised credentials."
+  },
+  "monitoring_observability": {
+    "logs": "Centralize container logs using a log forwarder (Fluentd/Fluent Bit) to send to ELK/Cloud logging.",
+    "metrics": "Expose application metrics via Prometheus client and collect node/container metrics via cAdvisor or node exporters.",
+    "traces": "Use distributed tracing (OpenTelemetry) for request flows inside microservices.",
+    "alerting": "Define SLI/SLOs and set alerts for high error rates, latency, resource exhaustion." 
+  }
+}

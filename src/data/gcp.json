@@ -1,0 +1,18 @@
+{
+  "id": "gcp",
+  "title": "GCP",
+  "summary": "Google Cloud Platform.",
+  "why": "Scalable cloud services with strong data/ML offerings.",
+  "architecture": "Projects -> Organizations -> Billing -> APIs.",
+  "use_cases": ["GKE","BigQuery","Cloud Functions"],
+  "install": ["# Install gcloud","curl https://sdk.cloud.google.com | bash"],
+  "commands": [
+    {"cmd":"gcloud init","desc":"Initialize SDK and login"}
+  ],
+  "best_practices": ["Use service accounts","Use IAM least privilege"],
+  "common_mistakes": ["Overuse of broad roles"],
+  "examples": ["Deploy to GKE"],
+  "mini_projects": ["Deploy a sample app to GKE"],
+  "interview_questions": ["What is a GCP project?"],
+  "deployment_workflow": ["Write infra -> gcloud deploy / Terraform -> monitor"]
+}

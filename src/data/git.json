@@ -1,0 +1,19 @@
+{
+  "id": "git",
+  "title": "Git & GitHub",
+  "summary": "Version control and collaboration using Git and GitHub.",
+  "why": "Source control is foundational for collaboration and CI/CD.",
+  "architecture": "Local repo, remotes, branches, pull requests.",
+  "use_cases": ["Source control","Code review"],
+  "install": ["# Install Git","sudo apt install -y git"],
+  "commands": [
+    {"cmd":"git clone <repo>","desc":"Clone a repository"},
+    {"cmd":"git checkout -b feature/x","desc":"Create a branch"}
+  ],
+  "best_practices": ["Use small commits","Write clear messages"],
+  "common_mistakes": ["Committing secrets","Large binary files in repo"],
+  "examples": ["Feature branch workflow"],
+  "mini_projects": ["Create CI using GitHub Actions"],
+  "interview_questions": ["Explain rebase vs merge"],
+  "deployment_workflow": ["Push -> PR -> Merge -> CI triggers"]
+}

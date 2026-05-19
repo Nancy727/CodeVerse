@@ -1,0 +1,22 @@
+{
+  "title":"AWS Cloud Engineer Roadmap",
+  "subtitle":"Core AWS services and best practices for cloud engineers.",
+  "estimated":"3-5 weeks",
+  "progress":12,
+  "beginner":[
+    {"title":"EC2","difficulty":"Beginner","description":"Understand instances, AMIs, and SSH access.","time":"2 days","useCase":"Run VMs in cloud","project":"Launch and SSH into an EC2 instance"},
+    {"title":"IAM","difficulty":"Beginner","description":"Manage users, roles, and policies.","time":"1 day","useCase":"Secure access","project":"Create an IAM role for an EC2 instance"},
+    {"title":"VPC","difficulty":"Beginner","description":"Networking basics: subnets, route tables.","time":"2 days","useCase":"Isolate resources","project":"Create a VPC with public/private subnets"}
+  ],
+  "intermediate":[
+    {"title":"S3 & Storage","difficulty":"Intermediate","description":"Object storage and lifecycle policies.","time":"1 day","useCase":"Static site hosting and backups","project":"Host a static site on S3 + CloudFront"},
+    {"title":"Load Balancer & Auto Scaling","difficulty":"Intermediate","description":"ALB/NLB and Auto Scaling Groups.","time":"2 days","useCase":"Scale web apps","project":"Attach EC2 to an ALB with ASG"}
+  ],
+  "advanced":[
+    {"title":"ECS/EKS","difficulty":"Advanced","description":"Container orchestrators on AWS.","time":"3 days","useCase":"Run container workloads","project":"Deploy an app to EKS or ECS"},
+    {"title":"CloudWatch & X-Ray","difficulty":"Advanced","description":"Observability for production systems.","time":"2 days","useCase":"Monitor and trace services","project":"Create dashboards and alarms in CloudWatch"}
+  ],
+  "production":[
+    {"title":"Security Best Practices","difficulty":"Production","description":"IAM least privilege, encryption, and auditing.","time":"3 days","useCase":"Harden production accounts","project":"Run an audit and implement recommended controls"}
+  ]
+}

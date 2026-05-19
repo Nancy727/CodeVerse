@@ -1,0 +1,164 @@
+{
+  "hero": {
+    "heading": "🏗️ Terraform - Infrastructure as Code Made Simple",
+    "subtitle": "Define your entire cloud infrastructure in code. Version it, test it, deploy it consistently across clouds.",
+    "difficulty": "Intermediate",
+    "timeToLearn": "5-6 hours",
+    "keySkill": "Essential for Cloud Engineers",
+    "whyLearn": "If you manage cloud infrastructure, Terraform is the industry standard. Used by Netflix, Uber, AWS, Google, and thousands of companies.",
+    "icon": "🏗️"
+  },
+  "storytelling": {
+    "problem": "Manually clicking AWS console to create servers, databases, networks. Mistake? Manual delete and recreate. Scale? Manual setup for each environment. Nightmare.",
+    "solution": "Terraform lets you describe infrastructure in code. Apply once → all resources created. Change code → resources update. Delete code → resources destroyed. Automatic and consistent.",
+    "analogy": "Terraform is like a blueprint for building. You draw blueprint (write HCL), contractor builds it (terraform apply). Change blueprint → rebuild. Delete blueprint → demolish.",
+    "realWorldExample": "Uber uses Terraform to manage millions of cloud resources across hundreds of services. GitOps workflow: code review, approve, auto-deploy.",
+    "deepDive": "Terraform is declarative. You describe desired state, Terraform handles implementation details. Works with AWS, GCP, Azure, Kubernetes, GitHub, and 500+ providers."
+  },
+  "architectureFlow": [
+    {
+      "icon": "📝",
+      "title": "Write HCL Code",
+      "description": "Define infrastructure in Terraform files (main.tf, variables.tf)",
+      "details": "Describe resources: EC2 instances, RDS databases, VPCs, security groups, load balancers, etc."
+    },
+    {
+      "icon": "🔍",
+      "title": "Plan Changes",
+      "description": "Run terraform plan to see what will be created/modified/deleted",
+      "details": "Review plan before applying. Catch mistakes before making expensive infrastructure changes."
+    },
+    {
+      "icon": "🚀",
+      "title": "Apply Changes",
+      "description": "Run terraform apply to create/update resources in your cloud account",
+      "details": "Terraform manages state. Knows what exists and what needs to change."
+    },
+    {
+      "icon": "📊",
+      "title": "Manage State",
+      "description": "Terraform state file tracks all resources it created",
+      "details": "Store state in remote backend (S3, Terraform Cloud). Team members see same state."
+    }
+  ],
+  "learningPath": {
+    "beginner": [
+      {"topic": "HCL Syntax", "description": "Terraform configuration language. Resources, variables, outputs."},
+      {"topic": "Providers", "description": "AWS, GCP, Azure, Kubernetes, GitHub. Tells Terraform how to talk to services."},
+      {"topic": "Resources", "description": "EC2, RDS, S3, VPC. Building blocks of your infrastructure."},
+      {"topic": "Variables & Outputs", "description": "Parameterize configs. Make modules reusable."},
+      {"topic": "terraform init/plan/apply", "description": "Core workflow commands. Initialize, preview, deploy."}
+    ],
+    "intermediate": [
+      {"topic": "Modules", "description": "Package reusable infrastructure. DRY principle."},
+      {"topic": "State Management", "description": "Remote state backends. Locking. Avoid conflicts."},
+      {"topic": "Data Sources", "description": "Query existing resources without managing them."},
+      {"topic": "Workspaces", "description": "Manage multiple environments (dev, staging, prod) with same code."},
+      {"topic": "Interpolation & Functions", "description": "Dynamic values. Conditional logic."}
+    ],
+    "advanced": [
+      {"topic": "Custom Providers", "description": "Build providers for proprietary systems."},
+      {"topic": "Testing with Terratest", "description": "Write tests for your infrastructure code."},
+      {"topic": "Cost Estimation", "description": "Predict infrastructure costs before deploying."},
+      {"topic": "Policy as Code", "description": "Enforce compliance rules (Sentinel, OPA)."},
+      {"topic": "Drift Detection", "description": "Detect when cloud resources diverge from code."}
+    ]
+  },
+  "commands": [
+    {
+      "cmd": "terraform init",
+      "description": "Initialize Terraform working directory",
+      "whatItDoes": "Downloads provider plugins, sets up state management, prepares for terraform operations",
+      "realUseCase": "First step in any Terraform project. Required after cloning repo or changing backends.",
+      "example": "terraform init\nInitialized Terraform working directory containing .terraform configuration",
+      "commonMistake": "Forgetting to run terraform init causes provider not found errors",
+      "difficulty": "Beginner"
+    },
+    {
+      "cmd": "terraform plan",
+      "description": "Preview infrastructure changes before applying",
+      "whatItDoes": "Shows what resources will be created, modified, or destroyed",
+      "realUseCase": "Always run before applying. Catch mistakes that could damage production.",
+      "example": "terraform plan\nPlan: 3 to add, 0 to change, 0 to destroy",
+      "commonMistake": "Skipping plan and applying blindly causes unexpected infrastructure changes",
+      "difficulty": "Beginner"
+    },
+    {
+      "cmd": "terraform apply",
+      "description": "Create or update infrastructure based on Terraform code",
+      "whatItDoes": "Applies the planned changes to your cloud provider",
+      "realUseCase": "Deploy infrastructure. Used in CI/CD pipelines. Requires careful review of plan first.",
+      "example": "terraform apply\nApply complete! Resources: 3 added, 0 changed, 0 destroyed",
+      "commonMistake": "Running without reviewing plan first can destroy production resources",
+      "difficulty": "Intermediate"
+    },
+    {
+      "cmd": "terraform destroy",
+      "description": "Delete all infrastructure managed by Terraform",
+      "whatItDoes": "Destroys all resources defined in Terraform code",
+      "realUseCase": "Clean up resources when no longer needed. Avoid unnecessary costs.",
+      "example": "terraform destroy\nDestroy complete! Resources: 3 destroyed",
+      "commonMistake": "Accidentally destroying production environment. Use prevent_destroy meta-argument for critical resources.",
+      "difficulty": "Advanced"
+    },
+    {
+      "cmd": "terraform state list",
+      "description": "List all resources managed by Terraform",
+      "whatItDoes": "Shows all resources tracked in state file",
+      "realUseCase": "Understand what Terraform is managing. Debug state issues.",
+      "example": "terraform state list\naws_instance.web_server\naws_db_instance.database",
+      "commonMistake": "Manually deleting resources without telling Terraform creates state drift",
+      "difficulty": "Intermediate"
+    }
+  ],
+  "comparisons": [
+    {
+      "title": "Terraform vs CloudFormation vs Pulumi",
+      "left": {
+        "name": "🏗️ Terraform",
+        "points": ["Multi-cloud support (AWS, GCP, Azure, etc.)", "Large ecosystem of providers", "HCL is easy to learn", "Industry standard"]
+      },
+      "right": {
+        "name": "☁️ CloudFormation / 🐍 Pulumi",
+        "points": ["CloudFormation is AWS-only but tightly integrated", "Pulumi uses real programming languages (Python, Go)", "Pulumi more powerful but steeper learning curve", "CloudFormation limited outside AWS"]
+      },
+      "whenToUse": "Use Terraform for multi-cloud or broad provider support. Use CloudFormation if AWS-only. Use Pulumi if you want programmatic control."
+    }
+  ],
+  "beginnerMistakes": [
+    {"title": "Storing State File Locally", "description": "State file in git means passwords and secrets exposed. No team collaboration. Corrupted state breaks everything.", "howToFix": "Use remote backend (S3, Terraform Cloud). Enable state locking. Never commit state files."},
+    {"title": "Using 'latest' for Provider Versions", "description": "Uncontrolled provider upgrades break your infrastructure. Different results for different team members.", "howToFix": "Pin provider versions in code. Require_version = '~> 5.0' for explicit control."}
+  ],
+  "realWorldUsage": [
+    {"name": "Netflix", "logo": "🎬", "industry": "Streaming", "usage": "Netflix uses Terraform to manage massive multi-cloud infrastructure across AWS, GCP, and on-prem."},
+    {"name": "Uber", "logo": "🚗", "industry": "Mobility", "usage": "Uber uses Terraform with GitOps for thousands of microservices infrastructure."},
+    {"name": "Airbnb", "logo": "🏠", "industry": "Travel", "usage": "Airbnb manages infrastructure-as-code using Terraform for consistency and auditability."}
+  ],
+  "productionSection": {
+    "scaling": "Use modules to scale infrastructure patterns. Terraform workspaces for multiple environments. Parallelization with -parallelism flag.",
+    "security": "Store state securely (S3 with encryption). Use IAM roles for Terraform service accounts. Vault for secrets management. Plan reviews before apply.",
+    "monitoring": "Track state changes with audit logs. Monitor terraform apply runs. Alert on infrastructure drift. Use policy-as-code (Sentinel).",
+    "cicd": "Store terraform code in Git. Require PR reviews before apply. Auto-plan on PRs. Auto-apply on merge. GitOps workflow."
+  },
+  "labs": [
+    {"title": "Deploy Your First Server", "description": "Create an EC2 instance using Terraform", "estimatedTime": "15 minutes", "steps": [{"title": "Write main.tf", "instruction": "Define EC2 instance resource"}, {"title": "Run terraform init", "instruction": "Initialize Terraform"}, {"title": "Run terraform plan", "instruction": "Preview changes"}, {"title": "Run terraform apply", "instruction": "Create server"}], "expectedOutput": "EC2 instance created in AWS"}
+  ],
+  "interviewQuestions": [
+    {"question": "What is the difference between terraform plan and terraform apply?", "difficulty": "Beginner", "answer": "Plan shows what changes will be made without making them. Apply executes those changes. Always review plan before apply.", "example": "Run plan first to catch mistakes. Then apply if plan looks good.", "followUp": "Why is reviewing plan important?", "tips": ["Explain safety of review process", "Talk about preventing mistakes", "Mention production protection"]}
+  ],
+  "cheatsheet": {
+    "core_commands": [
+      {"cmd": "terraform init", "description": "Initialize working directory"},
+      {"cmd": "terraform plan", "description": "Preview changes"},
+      {"cmd": "terraform apply", "description": "Apply changes"},
+      {"cmd": "terraform destroy", "description": "Delete resources"},
+      {"cmd": "terraform fmt", "description": "Format code"}
+    ],
+    "useful_commands": [
+      {"cmd": "terraform validate", "description": "Check configuration syntax"},
+      {"cmd": "terraform state list", "description": "List managed resources"},
+      {"cmd": "terraform state show resource", "description": "Show resource details"},
+      {"cmd": "terraform output", "description": "Display output values"}
+    ]
+  }
+}

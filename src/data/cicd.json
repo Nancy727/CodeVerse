@@ -1,0 +1,16 @@
+{
+  "id": "cicd",
+  "title": "CI/CD",
+  "summary": "Continuous Integration and Continuous Delivery practices.",
+  "why": "Automate testing and delivery for faster feedback and safer releases.",
+  "architecture": "Build -> Test -> Artifact -> Deploy stages; pipelines as code.",
+  "use_cases": ["Automated testing","Continuous deployments"],
+  "install": ["# Use existing CI platforms: Jenkins, GitHub Actions, GitLab CI"],
+  "commands": [],
+  "best_practices": ["Fail fast on tests","Keep pipeline fast"],
+  "common_mistakes": ["Long-running builds","No rollback strategy"],
+  "examples": ["Blue/Green deployment"],
+  "mini_projects": ["Create pipeline for static site deploy"],
+  "interview_questions": ["What is trunk-based development?"],
+  "deployment_workflow": ["Commit -> CI -> Build artifacts -> Deploy to staging -> Promote"]
+}

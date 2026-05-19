@@ -1,0 +1,16 @@
+{
+  "id": "microservices",
+  "title": "Microservices Architecture",
+  "summary": "Design approach for building applications as small independent services.",
+  "why": "Scalability, independent deployability, and team autonomy.",
+  "architecture": "Service boundaries, API gateways, service discovery, message brokers.",
+  "use_cases": ["Large-scale systems","Independent deployment schedules"],
+  "install": [],
+  "commands": [],
+  "best_practices": ["Design APIs carefully","Use observability and tracing"],
+  "common_mistakes": ["Too fine-grained services","Lack of automation"],
+  "examples": ["E-commerce split into carts, orders, catalog"],
+  "mini_projects": ["Decompose a monolith into two services"],
+  "interview_questions": ["What are the trade-offs of microservices?"],
+  "deployment_workflow": ["Design -> Build services -> CI/CD -> Service mesh / routing"]
+}

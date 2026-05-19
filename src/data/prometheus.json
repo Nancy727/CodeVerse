@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "heading": "⏱️ Prometheus - Metrics Collection & Alerting",
+    "subtitle": "A reliable time-series database for monitoring, alerting, and scraping metrics from your services.",
+    "difficulty": "Beginner",
+    "timeToLearn": "3-4 hours",
+    "keySkill": "Monitoring",
+    "whyLearn": "Prometheus is the de-facto metrics store in cloud-native ecosystems and pairs well with Grafana for visualization.",
+    "icon": "⏱️"
+  },
+  "storytelling": {
+    "problem": "You need to know application health over time: request rates, latency, error counts, but you don't have a stable place to store and query time-series data.",
+    "solution": "Prometheus scrapes metric endpoints, stores time-series, and provides a powerful query language (PromQL) to compute alerts and derive SLOs.",
+    "analogy": "Think of Prometheus as a ledger that records measurements over time so you can answer questions like 'what was the 95th percentile latency last week?'.",
+    "realWorldExample": "Prometheus scrapes exporters (node_exporter, cadvisor) and application metrics to monitor clusters and trigger alerts when anomalies are detected.",
+    "deepDive": "Prometheus uses a pull model (scraping HTTP endpoints), has a local TSDB optimized for fast ingest and queries, and supports federation for scaling." 
+  },
+  "architectureFlow": [
+    {"icon":"🔧","title":"Instrument Your App","description":"Expose metrics via /metrics endpoint using client libraries","details":"Use Prometheus client libraries (Go, Python, Java) to export counters, gauges, and histograms."},
+    {"icon":"📡","title":"Scrape Metrics","description":"Prometheus periodically scrapes configured endpoints","details":"Jobs and targets in prometheus.yml define what to scrape and how often."},
+    {"icon":"📊","title":"Query & Alert","description":"Use PromQL to build alerts and dashboards","details":"Prometheus evaluates alerting rules and sends notifications to Alertmanager which routes to PagerDuty/Slack."},
+    {"icon":"🔁","title":"Scale with Federation","description":"Use federation or remote write to scale and centralize long-term metrics","details":"Remote write allows storing long-term metrics in remote TSDBs like Cortex, Thanos."}
+  ],
+  "learningPath": {
+    "beginner": [
+      {"topic":"Client Libraries","description":"Instrument code with counters, gauges, and histograms."},
+      {"topic":"PromQL Basics","description":"Learn queries: rate(), increase(), sum by()"},
+      {"topic":"Prometheus Config","description":"Configure scrape jobs and relabeling."}
+    ],
+    "intermediate": [
+      {"topic":"Alerting & Alertmanager","description":"Create alerts and route them to notification channels."},
+      {"topic":"Histogram & Buckets","description":"Use histograms to compute accurate percentiles."}
+    ],
+    "advanced": [
+      {"topic":"Scaling with Thanos/Cortex","description":"Long-term storage and multi-cluster aggregation."},
+      {"topic":"High Cardinality Challenges","description":"Strategies to reduce label cardinality and cost."}
+    ]
+  },
+  "title": "Prometheus",
+  "intro": {
+    "what": "Prometheus is an open-source systems monitoring and alerting toolkit that stores time-series data and provides a flexible query language.",
+    "why": "It offers fast, dimensional queries for metrics and a battle-tested alerting integration with Alertmanager.",
+    "problems_solved": ["Missing time-series store","Slow metric queries","Inflexible alerting"],
+    "industry_importance": "Prometheus is widely used to build SRE monitoring stacks and is a graduated CNCF project." 
+  },
+  "commands": [
+    {"cmd":"prometheus --config.file=prometheus.yml","explanation":"Start Prometheus with specified config","use_case":"Run locally for testing"},
+    {"cmd":"curl http://localhost:9090/api/v1/query?query=up","explanation":"Query instant vector for 'up' targets","use_case":"Verify scraping targets"}
+  ],
+  "comparisons": [],
+  "beginnerMistakes": [{"title":"High Cardinality Metrics","description":"Adding labels with unbounded values (user IDs) explodes storage and CPU.","howToFix":"Avoid high-cardinality labels, use aggregations or separate metrics."}],
+  "realWorldUsage": [],
+  "productionSection": {"monitoring":"Combine Prometheus with remote storage solutions (Thanos/Cortex) for long-term retention; use Alertmanager for dedup and routing."},
+  "labs": [{"title":"Instrument & Scrape","description":"Add a /metrics endpoint to a sample app and scrape it with Prometheus","estimatedTime":"25 minutes","steps":[{"title":"Add Client","instruction":"Add Prometheus client and expose metrics"},{"title":"Configure Prometheus","instruction":"Add scrape job and reload"}],"expectedOutput":"Metrics appear in Prometheus UI and are queryable"}],
+  "interviewQuestions": [{"question":"What is PromQL and why is it useful?","difficulty":"Easy","answer":"PromQL is Prometheus' query language for selecting and aggregating time-series; it's powerful for computing rates and percentiles over time."}],
+  "cheatsheet": {
+    "promql_basics": [
+      {"cmd": "up", "description": "Check whether scrape targets are healthy"},
+      {"cmd": "rate(http_requests_total[5m])", "description": "Calculate request rate over five minutes"},
+      {"cmd": "sum by (service) (rate(http_requests_total[5m]))", "description": "Aggregate request rate by service"},
+      {"cmd": "histogram_quantile(0.95, ...)", "description": "Estimate a latency percentile from histogram buckets"}
+    ],
+    "operational_tips": [
+      "Scrape metrics from /metrics endpoints and keep label cardinality low",
+      "Use Alertmanager to route and deduplicate alerts",
+      "Store long-term data with Thanos, Cortex, or remote write backends"
+    ]
+  }
+}

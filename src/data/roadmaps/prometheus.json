@@ -1,0 +1,20 @@
+{
+  "title":"Prometheus Monitoring Roadmap",
+  "subtitle":"Metrics, scraping, and alerting for reliable systems.",
+  "estimated":"1-2 weeks",
+  "progress":10,
+  "beginner":[
+    {"title":"Metrics Basics","difficulty":"Beginner","description":"Counters, gauges, histograms and best practices.","time":"1 day","useCase":"App instrumentation","project":"Expose /metrics endpoint in a sample app"},
+    {"title":"Exporters","difficulty":"Beginner","description":"Use node_exporter and cadvisor to collect system metrics.","time":"1 day","useCase":"Host and container metrics","project":"Scrape node_exporter metrics"}
+  ],
+  "intermediate":[
+    {"title":"PromQL","difficulty":"Intermediate","description":"Query language to compute rates and aggregates.","time":"2 days","useCase":"Create alerts and dashboards","project":"Write PromQL queries for P95 latency"},
+    {"title":"Alertmanager","difficulty":"Intermediate","description":"Route and deduplicate alerts.","time":"1 day","useCase":"Notify on incidents","project":"Configure Alertmanager with Slack"}
+  ],
+  "advanced":[
+    {"title":"Scaling & Remote Write","difficulty":"Advanced","description":"Use Thanos/Cortex for long-term storage.","time":"3 days","useCase":"Centralized metrics","project":"Configure remote write to Cortex"}
+  ],
+  "production":[
+    {"title":"Kubernetes Monitoring","difficulty":"Production","description":"Scrape and monitor cluster components and apps.","time":"3 days","useCase":"Monitor K8s clusters","project":"Deploy Prometheus operator and monitor cluster"}
+  ]
+}
