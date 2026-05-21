@@ -17,14 +17,14 @@ import CheatsheetCard from '../components/CheatsheetCard'
 // Import data
 
 import docker from '../data/docker.json'
-import k8s from '../data/kubernetes.json'
+import k8s from '../data/k3s.json'
 import aws from '../data/aws.json'
 import terraform from '../data/terraform.json'
 import jenkins from '../data/jenkins.json'
 import grafana from '../data/grafana.json'
 import prometheus from '../data/prometheus.json'
 
-const map = { docker, kubernetes: k8s, aws, terraform, jenkins, grafana, prometheus }
+const map = { docker, k3s: k8s, aws, terraform, jenkins, grafana, prometheus }
 export default function Technology() {
   const { id } = useParams()
   const data = map[id] || docker

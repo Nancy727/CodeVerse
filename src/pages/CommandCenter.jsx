@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import docker from '../data/docker.json'
-import k8s from '../data/kubernetes.json'
+import k8s from '../data/k3s.json'
 import CopyButton from '../components/CopyButton'
 
 const all = [docker, k8s]

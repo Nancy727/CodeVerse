@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from '../components/Hero'
 import TechCard from '../components/TechCard'
 import docker from '../data/docker.json'
-import k8s from '../data/kubernetes.json'
+import k8s from '../data/k3s.json'
 import terraform from '../data/terraform.json'
 import jenkins from '../data/jenkins.json'
 import grafana from '../data/grafana.json'
@@ -24,7 +24,7 @@ export default function Home(){
 
   const trending = [
     normalize(docker, 'docker'),
-    normalize(k8s, 'kubernetes'),
+    normalize(k8s, 'k3s'),
     normalize(terraform, 'terraform'),
     normalize(jenkins, 'jenkins'),
     normalize(grafana, 'grafana'),

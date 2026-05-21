@@ -3,7 +3,7 @@ import React, { Suspense, lazy } from 'react'
 // Lazy load playground components for optimal performance
 const MonolithVsMicroservices = lazy(() => import('../components/playground/MonolithVsMicroservices'))
 const CICDPipeline = lazy(() => import('../components/playground/CICDPipeline'))
-const KubernetesFlow = lazy(() => import('../components/playground/KubernetesFlow'))
+const K3sFlow = lazy(() => import('../components/playground/K3sFlow'))
 const DockerLifecycle = lazy(() => import('../components/playground/DockerLifecycle'))
 const TerraformPlayground = lazy(() => import('../components/playground/TerraformPlayground'))
 const MonitoringArchitecture = lazy(() => import('../components/playground/MonitoringArchitecture'))
@@ -31,7 +31,7 @@ export default function ArchitecturePlayground(){
           Architecture Playground
         </h1>
         <p className="text-slate-400 mt-2">
-          Explore interactive visualizations of modern cloud-native architectures. Learn DevOps, Kubernetes, CI/CD, and AWS by interacting with real-world system designs.
+          Explore interactive visualizations of modern cloud-native architectures. Learn DevOps, k3s, CI/CD, and AWS by interacting with real-world system designs.
         </p>
       </div>
 
@@ -52,7 +52,7 @@ export default function ArchitecturePlayground(){
       </Suspense>
 
       <Suspense fallback={<LoadingPlaceholder />}>
-        <KubernetesFlow />
+        <K3sFlow />
       </Suspense>
 
       <Suspense fallback={<LoadingPlaceholder />}>

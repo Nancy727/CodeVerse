@@ -7,7 +7,7 @@ import { RequestAnimation, MovingDotsAnimation } from './RequestAnimation'
 import TooltipCard, { HoverTooltip } from './TooltipCard'
 import ActionButton from './ActionButton'
 
-export default function KubernetesRequestFlow() {
+export default function K3sRequestFlow() {
   const [isAnimating, setIsAnimating] = useState(false)
 
   const requestPath = [
@@ -24,7 +24,7 @@ export default function KubernetesRequestFlow() {
       explanation: 'Acts as entry point, routes traffic based on URL/hostname'
     },
     {
-      label: 'Kubernetes Service',
+      label: 'k3s Service',
       description: 'Load balancer & service discovery',
       icon: '⚖️',
       explanation: 'Works like a receptionist - directs requests to available pods'
@@ -45,8 +45,8 @@ export default function KubernetesRequestFlow() {
 
   return (
     <PlaygroundSection
-      title="Kubernetes Request Flow"
-      description="Visualize how a user request travels through a Kubernetes cluster"
+      title="k3s Request Flow"
+      description="Visualize how a user request travels through a k3s cluster"
       icon={Network}
     >
       <div className="space-y-6">
@@ -133,7 +133,7 @@ export default function KubernetesRequestFlow() {
             },
             {
               title: 'Pod',
-              content: 'Smallest Kubernetes unit. Usually contains one container with your application.',
+              content: 'Smallest k3s unit. Usually contains one container with your application.',
               icon: '📦'
             },
             {
@@ -175,8 +175,8 @@ export default function KubernetesRequestFlow() {
 
         {/* Advanced Features */}
         <TooltipCard
-          title="Advanced K8s Features"
-          content="Kubernetes also handles: Self-healing (restarts failed pods), Rolling updates (zero downtime), Auto-scaling (scale based on CPU/memory), DNS resolution, Network policies, Persistent volumes, and more!"
+          title="Advanced k3s Features"
+          content="k3s also handles: Self-healing (restarts failed pods), Rolling updates (zero downtime), Auto-scaling (scale based on CPU/memory), DNS resolution, Network policies, Persistent volumes, and more!"
           type="info"
         />
       </div>

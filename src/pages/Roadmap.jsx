@@ -1,13 +1,13 @@
 import React, {useState, useMemo} from 'react'
 import RoadmapCard from '../components/RoadmapCard'
 import docker from '../data/roadmaps/docker.json'
-import kubernetes from '../data/roadmaps/kubernetes.json'
+import k3s from '../data/roadmaps/k3s.json'
 import terraform from '../data/roadmaps/terraform.json'
 import aws from '../data/roadmaps/aws.json'
 import grafana from '../data/roadmaps/grafana.json'
 import prometheus from '../data/roadmaps/prometheus.json'
 
-const ALL = [docker, kubernetes, terraform, aws, grafana, prometheus]
+const ALL = [docker, k3s, terraform, aws, grafana, prometheus]
 
 export default function Roadmap(){
   const [query,setQuery] = useState('')

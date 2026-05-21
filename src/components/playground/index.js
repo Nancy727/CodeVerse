@@ -11,7 +11,7 @@ export {
 } from './RequestAnimation'
 export { default as MonolithVsMicroservices } from './MonolithVsMicroservices'
 export { default as CICDPipeline } from './CICDPipeline'
-export { default as KubernetesFlow } from './KubernetesFlow'
+export { default as K3sFlow } from './K3sFlow'
 export { default as DockerLifecycle } from './DockerLifecycle'
 export { default as TerraformPlayground } from './TerraformPlayground'
 export { default as MonitoringArchitecture } from './MonitoringArchitecture'

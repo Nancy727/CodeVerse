@@ -2,7 +2,7 @@
 # Script to generate all technology JSON files with comprehensive student-friendly content
 # Run this to regenerate all technology content at once
 
-cat > kubernetes.json << 'K8S_EOF'
+cat > k3s.json << 'K8S_EOF'
 {
   "hero": {
     "heading": "⚙️ Kubernetes - Orchestrate Containers at Scale",
@@ -126,4 +126,4 @@ cat > kubernetes.json << 'K8S_EOF'
 }
 K8S_EOF
 
-echo "Kubernetes content generated"
+echo "k3s content generated"

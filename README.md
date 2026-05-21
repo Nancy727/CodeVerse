@@ -290,7 +290,7 @@ CloudVerse/
 |-- src/
 |   |-- application source code
 |
-|-- k8s/
+|-- k3s/
 |   |-- deployment.yaml
 |   |-- service.yaml
 |   |-- ingress.yaml
@@ -350,9 +350,9 @@ docker run -p 80:80 cloudverse
 ### Step 4 - Deploy to k3s
 
 ```bash
-kubectl apply -f k8s/deployment.yaml
-kubectl apply -f k8s/service.yaml
-kubectl apply -f k8s/ingress.yaml
+kubectl apply -f k3s/deployment.yaml
+kubectl apply -f k3s/service.yaml
+kubectl apply -f k3s/ingress.yaml
 ```
 
 ### Step 5 - Verify Deployment

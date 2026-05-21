@@ -11,7 +11,7 @@ function Icon({id}){
           <path d="M5 7h14v2H5z" fill="#2496ED" opacity="0.9" />
         </svg>
       )
-    case 'kubernetes':
+    case 'k3s':
       return (
         <svg {...common} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#326CE5">
           <path d="M12 2l3 5 6 2-5 4 1 6-5-3-5 3 1-6-5-4 6-2 3-5z" />
