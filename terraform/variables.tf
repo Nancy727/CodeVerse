@@ -31,5 +31,5 @@ variable "allowed_cidr" {
 variable "docker_image" {
   description = "Docker image to run on the instance"
   type        = string
-  default     = "your-docker-repo/cloudverse:latest"
+  default     = "nancykumari/cloudverse:latest"
 }

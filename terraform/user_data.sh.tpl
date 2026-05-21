@@ -1,5 +1,5 @@
 #!/bin/bash
-# Lightweight startup script: install Docker, docker-compose, run the app and monitoring stack
+# Lightweight startup script: install Docker and run the app container
 set -e
 
 # Update and install docker
@@ -20,11 +20,3 @@ systemctl enable docker --now || true
 
 # Run the frontend container
 docker run -d --name cloudverse -p 80:80 --restart unless-stopped ${docker_image}
-
-# Optional: start monitoring stack (Prometheus + Grafana) via docker-compose if /opt/monitoring exists
-if [ -d /opt/monitoring ]; then
-  cd /opt/monitoring
-  if [ -f docker-compose.monitoring.yml ]; then
-    docker-compose -f docker-compose.monitoring.yml up -d
-  fi
-fi
